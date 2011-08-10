@@ -37,9 +37,21 @@ After Humla has been downloaded, go to the humla directory and update submodules
 # Usage
 
 To run test.html in examples locally, you need to start your browser with options to run XHR on
-local files. For Chrome you start it with arguments --args --allow-file-access-from-files
-
+local files. For Chrome you start it with arguments `--args --allow-file-access-from-files`. 
 If you can access test.html at a Web server, just point your browser to it.
+
+Use the following keys to navigate in the presentation:
+
+    * `1` switches to the browser view
+    * `2` switches to the slideshow view
+    * `3` switches to the grid view
+    * `4` or `p` switches to the print view
+    * `left`, `right` goes to the previous and next slide respectively
+    * `e` shows the last error if any
+    * `d` toggles the debug mode
+
+
+
 
 # License
 The GPL version 3, http://www.gnu.org/licenses/gpl.txt
