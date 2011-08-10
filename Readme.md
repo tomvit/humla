@@ -4,7 +4,8 @@ Humla is an open source project of HTML5 presentation environment inspired by HT
 Similarly as Beamer exist for Latexers, Humla'a aim is to provide environment for creating slides for presentations in HTML while 
 utilizing extensive HTML5 features. Humla is particularly 
 useful for technical presentations and was originally created as a tool for the Czech Technical University courses Middleware and Web Services 
-and Web 2.0. To see Humla in action, see <a href="http://vitvar.com/courses/mdw/slides/lecture1.html">Lecture 1</a> of Web Services and Middleware course.
+and Web 2.0. To see Humla in action, see <a href="http://vitvar.com/courses/mdw/slides/lecture1.html">Lecture 1 of 
+Web Services and Middleware</a> course.
 
 There is currently no IDE available, slides must be edited directly in HTML.
 
@@ -51,7 +52,7 @@ Use the following keys to navigate in the presentation:
   * `e` shows the last error if any
   * `d` toggles the debug mode
 
-See <a href="http://vitvar.com/courses/mdw/slides/lecture1.html">Lecture 1</a> of Web Services and Middleware 
+See <a href="http://vitvar.com/courses/mdw/slides/lecture1.html">Lecture 1 of Web Services and Middleware</a> 
 course for more information on how Humla can be used for making presentations.
 
 # License
