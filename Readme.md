@@ -10,7 +10,7 @@ There is currently no IDE available, slides must be edited directly in HTML.
 
 Feel free to fork Humla, write plugins and patch it yourself!
 
-## Features
+# Features
 
   * Every slide has a unique URL.
   * Plugin architecture with views and extensions. 
@@ -20,11 +20,26 @@ Feel free to fork Humla, write plugins and patch it yourself!
   * An extension defines processing of slides' content such as for replacment of variables, online integration with pictures from 
     Google Drawing, online integration with github to display a code, Latex formulas, etc.
 
-## Browser Support
-Currently Humla works and is tested on the latest versions of Chrome and Safari. 
+# Browser Support
 
-## Usage
-TODO
+Humla currently works and is tested on the latest versions of Chrome and Safari. 
+
+# Installation
+
+Via git (or downloaded tarball):
+
+    $ git clone git@github.com:tomvit/humla.git
+
+After Humla has been downloaded, go to the humla directory and update submodules:
+
+    $ git submodule update --init --recursive
+
+# Usage
+
+To run test.html in examples locally, you need to start your browser with options to run XHR on
+local files. For Chrome you start it with arguments --args --allow-file-access-from-files
+
+If you can access test.html at a Web server, just point your browser to it.
 
 # License
 The GPL version 3, http://www.gnu.org/licenses/gpl.txt
