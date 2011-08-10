@@ -1,0 +1,124 @@
+{
+    "keys" : {
+        "prev"      : [33, 37],
+        "next"      : [34, 39],
+        "first"     : [],
+        "last"      : [],
+        "goto"      : [],
+        "search"    : [],
+        "tdebug"    : [68],
+        "spare"     : [84],
+        "terrs"     : [69],        
+        "view1"     : [49, 116],
+        "view2"     : [50, 27],
+        "view3"     : [51],
+        "view4"     : [52, 80],
+        "view5"     : [53],
+        "view6"     : [],
+        "view7"     : [],
+        "view8"     : [],
+        "view9"     : []
+    },
+
+    "views": [
+        {   "id"     : "1",
+            "object" : "view_browser",
+            "script" : { "src" : "views/browser.js" }, 
+            "style"  : { "src" : "views/browser.css", "media" : "screen" }
+        }, 
+
+        {   "id"     : "2", 
+            "object" : "view_slideshow",
+            "script" : { "src" : "views/slideshow.js" }, 
+            "style"  : { "src" : "views/slideshow.css", "media" : "screen" }  
+        }, 
+
+        {   "id"     : "3", 
+            "object" : "view_grid",
+            "script" : { "src" : "views/grid.js" }, 
+            "style"  : { "src" : "views/grid.css", "media" : "screen" },  
+            "keys_disabled" : ["prev", "next", "first", "last", "goto"]             
+        }, 
+
+        {   "id"     : "4", 
+            "object" : "view_print",        
+            "script" : { "src" : "views/print.js" }, 
+            "style"  : { "src" : "views/print.css", "media" : "screen, print" },  
+            "keys_disabled" : ["prev", "next", "first", "last", "goto"]             
+        }
+        
+    ],
+    
+    "extensions": [
+        {   "id" : "outline",
+            "object" : "ex_outline",
+            "scripts"  : [ { "src" : "ext/outline.js" } ],  
+            "styles"   : [ { "src" : "ext/outline.css", "media" : "screen, print" } ], 
+            "enabled" : true 
+        },
+        
+        {   "id" : "params",
+            "object" : "ex_params",
+            "scripts"  : [ { "src" : "ext/params.js" } ], 
+            "enabled" : true
+        },
+        
+        {   "id" : "latex",
+            "object" : "ex_latex",
+            "scripts"  : [ { "src" : "ext/latex.js" } ],    
+            "styles"   : [ { "src" : "ext/latex.css", "media" : "screen, print" } ],
+            "params"   : {
+                "mathtex" : "your_mathtex_url_here"
+            },
+            "enabled" : true 
+        },        
+        
+        {   "id" : "drawing",
+            "object" : "ex_drawing",
+            "scripts"  : [ { "src" : "ext/drawing.js" } ],  
+            "styles"   : [ { "src" : "ext/drawing.css", "media" : "screen, print" } ],
+            "params"   : {
+                "format" : "svg"
+            },
+            "enabled" : true 
+        }, 
+        
+        {   "id" : "syntaxhighlighter",
+            "object" : "ex_syntaxhighlighter",
+            "scripts" : [ { "src" : "../support/syntaxhighlighter_3.0.83/scripts/shCore.js" },
+                          { "src" : "../support/syntaxhighlighter_3.0.83/scripts/shBrushJScript.js", "g" : 1 },
+                          { "src" : "../support/syntaxhighlighter_3.0.83/scripts/shBrushXml.js", "g" : 1 },
+                          { "src" : "../support/syntaxhighlighter_3.0.83/scripts/shBrushPlain.js", "g" : 1 },
+                          { "src" : "../support/syntaxhighlighter_3.0.83/scripts/shBrushJava.js", "g" : 1 },
+                          { "src" : "../support/syntaxhighlighter_3.0.83/scripts/shBrushBash.js", "g" : 1 },                          
+                          { "src" : "ext/syntaxhighlighter.js", "g" : 1 } ],
+            "styles"  : [ { "src" : "../support/syntaxhighlighter_3.0.83/styles/shCoreDefault.css",  "media" : "screen, print" },
+                          { "src" : "ext/syntaxhighlighter.css", "media" : "screen, print" } ],               
+            "params"  : {
+                "defaults" : [
+                        { "key" : "toolbar", "value" : "false" }
+                    ]
+            },
+            "enabled" : true
+        },
+
+        {   "id" : "github",
+            "object" : "ex_github",
+            "scripts" : [ { "src" : "ext/github.js" } ],
+            "styles"  : [ { "src" : "ext/github.css", "media" : "screen, print" } ],
+            "params"  : {
+                "url"  : "http://proxy.vitvar.com/raw.github",
+                "user-repo" : "tomvit/mdw-examples"
+            },
+            "enabled" : true 
+        },
+
+        {   "id" : "rssfeed",
+            "object" : "ex_rssfeed",
+            "scripts" : [ { "src" : "ext/rssfeed.js" } ],
+            "enabled" : true 
+        }
+        
+    ]
+    
+}

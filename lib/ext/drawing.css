@@ -1,0 +1,17 @@
+.h-drawing {
+    margin-top: 10px;
+	width: 100%;
+	text-align: center;
+	color: #cccccc;
+	font: Arial;
+    font-size: 0.5em;
+}
+
+.h-drawing img {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.debug .h-drawing img {
+    border: 1px solid brown;
+}

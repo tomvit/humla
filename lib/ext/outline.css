@@ -1,0 +1,15 @@
+.slide > ul li.outline-nextsec {
+    color: FireBrick;
+}
+
+.slide.outline a,
+.slide.outline a:visited {
+    color: inherit;
+    text-decoration :none;
+}
+
+.slide.outline > ul li:hover:not(.outline-nextsec) {
+}
+
+
+

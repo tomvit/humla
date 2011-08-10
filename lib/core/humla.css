@@ -1,0 +1,484 @@
+/*@font-face {
+    font-family: 'Pictos';
+    src: url('pictos-web.svg#webfontphKv1xv9') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}*/
+
+section header {
+    display: none;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+footer {
+    display: none;
+}
+
+a:visited,
+a {
+    color: Navy;
+    text-decoration: none;
+}
+
+a[rel='external'],
+a.ext-link {
+    background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAMAAAAMs7fIAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAPNQTFRFVoTXVoP/Tn/aTX3/W4viT3/aVYP/XY3hd5v/Jkv/Omv/MFv/THvVL1j/VoTYOGj/VYTYTn/bUYD/cZn/k6//R3T/VoL/Ml7/UYDVPm7XNmXSYJLpYZHrV4XYL1r/S3f/YIr/YpLrhKvrS3vVY4//T4DaOmvYW4j/UH/UV4T/QG/XMVv/S3vUMFz/MVz/aJD/KVD/YZPpeqHhRHT/QHD/WIX/QnP/dZr/gKT/W4ndOGf/gKXiR3P/VYH/RnH/NWXSMFr/Woj/ka//LFb2cJb/L1f/MV3/KVH/Tn3/dpv/dZ7/eJz/O2r/R3j/OWn/LFb1////RjFLFAAAAFF0Uk5T//////////////////////////////////////////////////////////////////////////////////////////////////////////8AaOyowQAAAL1JREFUeNpczulSwkAQBOBhN5uQcCURBAXkRgVEFEGUQ0ABOYR+/6eBbLIUZf/pqq+mq4bgp9rTQ15mAwrEenM55798rytJFP3mISWb5faf4DOm5PVF0zQj9xc5r+yvVvTh5jsAT8g59cifLMJwdSIBFJoS2run5/4jUQ1z89qDaRdXCeueiAHr1Q9wdyjJSyl474zTqYZxIQibE2S0S0ESiCpx1NeVQOw6E4wxIdht1pfhR5xk4vmylKMAAwDjPzvfamsg9QAAAABJRU5ErkJggg%3D%3D) no-repeat center right;
+    background-size: auto;
+    padding: 5px 25px 5px 0px;
+    text-decoration: none;
+
+    color: inherit;
+    font-style: inherit;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+a:hover {
+    color: FireBrick;
+}
+
+body {
+    background-color: #eee;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+    visibility: none;
+    font-size: 35px;
+    font-family: "Times New Roman";
+    color: #444;
+}
+
+/* The slide has predefined width and height 800 x 600. 
+   There is a number of other values elsewhere in humla that are consistent with this. 
+   If you change these values the presentation may not work correctly. */
+.slide {
+	display: none;
+	position: absolute;
+	overflow: hidden;
+	left: 50%;
+	top: 50%;
+	background-color: #fff;
+	width: 800px;			/* targeted resolution - width */
+	height: 600px;			/* targeted resolution - height */
+	margin-top: -300px; 	/* to center the slide, this must be height/2 */
+	
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 2px 5px; 
+    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 2px 5px;	
+    -o-box-shadow: rgba(0, 0, 0, 0.1) 0 2px 5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 5px; 
+    
+}
+
+.slide > hgroup {
+	margin-top: 0px;
+	font-size: 18px;
+	padding: 10px;
+	width: 100%;
+	height: 50px;
+	background-color: WhiteSmoke; 
+	
+	color: #BC8F8F;
+	
+    -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 5px; 
+    -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 5px; 
+    -o-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 5px; 
+}
+
+.slide > hgroup h1 {
+	padding-top: 4px;
+    width: 770px;
+	margin: 0px 10px 0px 10px;	
+}
+
+.intro > hgroup h2 {
+    width: 770px;
+}
+
+.slide > ul p,
+.slide > p,
+.slide > div {
+    margin: 12px 10px 0px 10px;
+    padding-left: 7px;
+    width: 773px; /* max. width of the p element on the 800px slide */
+}
+
+.slide > ul p {
+    width: 100%;
+}
+
+.slide > ul p {
+    margin: 5px 0px 0px -10px;
+    font-size: smaller;
+    font-style: italic;   
+}
+
+.slide > ol,
+.slide > ul {
+    width: 740px; /* max. width of the top enum element on the 800px slide */
+	margin-left: 10px;
+	margin-top: 2px;
+    margin-bottom: 0px;
+}
+
+.slide > ol li,
+.slide > ul li {
+    margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.slide > ol ol,
+.slide > ul ul {
+	padding: 0px 0px 0px 25px;
+}
+
+.slide > ol ol ol,
+.slide > ul ul ul {
+    padding: 0px 0px 0px 25px;
+}
+
+.slide > ul ul li:before {
+    font-family: "Arial";
+	margin-left: -25px;
+	content: "\2012\a0";  
+}
+
+.slide > ul ul ul li:before {
+	content: "\2192\a0";
+    margin-left: -35px;
+}
+
+.slide > ul ul ul {
+    margin-left: 0px;
+    padding-left: 33px;
+}
+
+.slide ul.no-bullet li:before,
+.slide > ul li.no-bullet:before {
+    margin-left: 0px;
+	content: "";
+}
+
+.slide ul.no-bullet li,
+.slide > ul li.no-bullet {
+    list-style-type: none;
+}
+
+.slide ul.no-bullet li,
+.slide > ul li.no-bullet {
+    margin-left: -25px;
+}
+
+.slide > ul ol li {
+	font-size: 30px;
+	font-style: italic;
+	margin-top: -7px;
+	margin-left: 15px;
+}
+
+.slide > ul ul li {
+    font-size: 30px;
+    font-style: italic;
+    margin-top: -7px;
+	list-style-type: none;
+}
+
+.slide ol.small li,
+.slide ul.small li {
+    zoom: 0.9;
+}
+
+.slide ol.x-small li,
+.slide ul.x-small li {
+    zoom: 0.8;
+}
+
+.slide ol.xx-small li,
+.slide ul.xx-small li {
+    zoom: 0.7;
+}
+
+.slide ol.spacing > li,
+.slide ol li.space-before,
+.slide ul.spacing > li,
+.slide ul li.space-before {
+    margin-top: 12px;
+}
+
+.slide ol.x-spacing > li,
+.slide ol li.x-space-before,
+.slide ul.x-spacing > li,
+.slide ul li.x-space-before {
+    margin-top: 18px;
+}
+
+.extref img {
+    width: 23px;
+}
+
+/* code */
+
+.slide code {
+    font-size: smaller;
+    font-style: normal;
+    font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+    color: DarkRed;
+}
+
+/* two columns */
+
+.slide .columns-2 {
+    -webkit-column-count: 2;
+    -webkit-column-gap: 1.2em;
+    -webkit-column-break-inside: avoid-column;
+}
+
+.slide > ul.columns-2 li {
+/*    margin-left: 30px;*/
+}
+
+.slide .break-before {
+    -webkit-column-break-before: always;
+}
+
+/* footer */
+
+.slide footer {
+	display: block;
+	border-top: 1px solid LightGrey;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	font-family: "Arial";
+	font-size: 11px;
+	color: DarkGray;
+	background-color: Whitesmoke;
+	height: 25px;
+}
+
+.slide footer p {
+	margin: 5px 5px 5px 5px;
+	text-overflow: ellipsis; 
+	white-space: nowrap; 
+	overflow: hidden;
+}
+
+.slide footer p:nth-child(1) {
+	float: left;
+}
+
+.slide footer p:nth-child(2) {
+	float: right;
+}
+
+.slide.no-footer footer {
+    display: none;
+}
+
+/* intro slide */
+
+.intro > hgroup {
+	margin-top: auto;
+	padding-top: 60px;
+	height: 170px;
+	background-color: RosyBrown;
+
+	color: WhiteSmoke;
+	background: -webkit-gradient(linear, left top, left bottom, from(#353f49), to(#252a2e));
+}
+
+.intro > hgroup h1 {
+	font-size: 45px;
+	margin: 0px;
+	text-align: center;
+}
+
+.intro > hgroup h2 {
+	font-size: 30px;
+	margin-top: 0px;
+	text-align: center;
+}
+
+.intro > footer {
+	display: none;
+}
+
+/* message box */
+
+#msgbox {
+    width: 650px;
+    position: fixed;
+    margin-left: 200px;
+    background-color: Wheat; 
+    padding-top: 0px;
+    z-index: 10;
+    margin-left: auto;
+    margin-right: auto;
+    top: 0px;
+    color: #222;
+    
+    -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 5px; 
+    -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 5px; 
+    -o-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 5px; 
+    
+    -moz-border-radius: 0px 0px 5px 5px;
+	-webkit-border-radius: 0px 0px 5px 5px;
+    -o-border-radius: 0px 0px 5px 5px;
+    border-radius: 0px 0px 5px 5px;
+    
+    opacity: 0.75;
+}
+
+#msgbox .close {
+    font-size: 14px;
+    top: 0px;
+    right: 3px;
+    opacity: 1;
+    color: RosyBrown;
+    cursor: pointer;
+    position: absolute;
+}
+
+#msgbox .close:before {
+    content: "\D7";
+}
+
+#msgbox .close:hover:before {
+    content: "\2297";
+    margin-right: -1px;
+    margin-top: -2px;
+}
+
+#msgbox:hover {
+    opacity: 1;
+}
+
+#msgbox p a:hover,
+#msgbox p a:visited,
+#msgbox p a,
+#msgbox p {
+    font-size: 14px;
+    font-family: arial;
+    color: inherit;
+}
+
+#msgbox p {
+    margin: 0px;    
+    padding: 7px 12px 7px 12px;
+    border-top: 1px solid Tan;
+}
+
+#msgbox p:nth-child(1) {
+    border: none;
+}
+
+#msgbox p.error {
+    color: maroon;
+}
+
+/* standard table formatting */
+
+table.small,
+.small table {
+    zoom: 0.9;
+}
+
+table.x-small,
+.x-small table {
+    zoom: 0.8;
+}
+
+table.xx-small,
+.xx-small table {
+    zoom: 0.7;
+}
+
+table {
+    font-size: 18px;
+	font-family: arial;
+	width: 600px;
+	border: 3px solid LightSteelBlue;
+	border-radius: 6px 6px;
+	border-spacing: 0px 0px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 2px 5px; 
+}
+
+table caption {
+	caption-side: bottom;
+	padding: 5px;
+	font-size: 15px;
+	color: #444444;
+}
+
+table thead {
+	font-weight: bold;
+	background-color: LightSteelBlue;
+	color: White;
+	border: 0px;
+	text-align: left;
+}
+
+table tbody td,
+table thead th {
+	padding: 5px 5px 5px 5px;
+	border-spacing: 10px;
+}
+
+table tbody td {
+	color: #444444;
+}
+
+table tbody tr:nth-child(even) {
+	background-color: WhiteSmoke;
+}
+
+/* humla key style */
+
+.key {
+    background-color: whitesmoke;
+    border: 2px solid silver;
+    border-radius: 3px 3px 3px 3px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0 2px 5px; 
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 10px 10px 15px;
+    font-family: Arial;
+    font-size: 16px;
+    font-style: normal;
+    float: left;
+    width: 12px;
+}
+
+.key:after {
+    clear: both;
+    content: "\a0\a0";
+}
+
+/* debug */
+
+.slide.debug > hgroup h1 {
+    border: 1px solid purple;
+}
+
+.slide.debug > ol,
+.slide.debug > ul {
+    border: 1px solid green;
+}
+
+.slide.debug > ol ol,
+.slide.debug > ul ul {
+    border: 1px solid red; 
+}
+
+.slide.debug > ol ol ol,
+.slide.debug > ul ul ul {
+  border: 1px solid blue; 
+}
+
+.slide.debug > ul p,
+.slide.debug > p {
+    border: 1px solid orange;
+}
+

@@ -1,0 +1,42 @@
+.h-latex {
+    width: 100%;
+	margin-left: auto;
+	margin-right: auto;	
+	margin-bottom: 25px;
+    zoom: 0.7;
+}
+
+.h-latex img {
+	margin-top: 5px;
+	opacity: 0.85;
+}
+
+.h-latex.lower img {
+	margin-bottom: -8px;
+}
+
+.h-latex.x-lower img {
+	margin-bottom: -16px;
+}
+
+.h-latex.xx-lower img {
+	margin-bottom: -28px;
+}
+
+/* following styles makes use of latex compatible with default humla style */
+
+.small .h-latex {
+    zoom: 0.67;
+}
+
+.x-small .h-latex {
+    zoom: 0.62;
+}
+
+.xx-small .h-latex {
+    zoom: 0.5;
+}
+
+.debug .h-latex img {
+    border: 1px solid silver;
+}

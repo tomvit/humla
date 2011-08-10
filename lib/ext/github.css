@@ -1,0 +1,47 @@
+.h-github {
+}
+
+.h-github .toolbar2-visible,
+.h-github .toolbar2 {
+    position: absolute !important;
+    bottom: 1px !important;
+    width: 55px !important;
+    height: 23px !important;
+    z-index: 10 !important;
+    border: 1px solid #cccccc !important;
+    right: 80px !important;
+    -moz-border-radius: 4px !important;
+    -webkit-border-radius: 4px !important;
+    background-color: whitesmoke !important;
+    font-family: "Pictos" !important;
+    
+    -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px; 
+    -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px;    	    
+  
+    -webkit-transition-property: opacity;
+    -webkit-transition-duration: 0.2s;
+    -webkit-transition-timing-function: ease-in-out;
+    opacity: 0.1;  
+}
+
+.h-github .toolbar2-visible {
+    opacity: 0.9;
+}
+
+.h-github .toolbar2-visible a.icon,
+.h-github .toolbar2 a.icon {
+    position: static !important;
+    font-family: "Pictos" !important;
+    font-size: 20px !important;
+    text-decoration: none !important;
+    color: #888;
+    padding: 6px !important;
+    text-shadow: 0 2px 0 #eee !important;        
+}
+
+.h-github .toolbar2-visible a:hover.icon,
+.h-github .toolbar2 a:hover.icon {
+    color: #222;
+    text-shadow: 0 2px 0 #eee !important;        
+}
+

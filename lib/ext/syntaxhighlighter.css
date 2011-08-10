@@ -1,0 +1,51 @@
+
+
+.syntaxhighlighter {
+    font-size: 0.55em !important;
+    overflow: hidden !important;
+}
+
+pre {
+    display: none;
+}
+
+/*.syntaxhighlighter.small {
+    zoom: 0.9;
+}
+
+.syntaxhighlighter.x-small {
+    zoom: 0.8;
+}
+
+.syntaxhighlighter.xx-small {
+    zoom: 0.7;
+}*/
+
+.debug .syntaxhighlighter {
+    border: 1px solid steelblue;
+}
+
+/* this is hack for v3.0.83 to display the code in multiple columns */
+.slide .columns-2 .syntaxhighlighter table td.code .container {
+    position: static !important;
+}
+
+.syntaxhighlighter div,
+.syntaxhighlighter code {    
+    line-height: 1.15em !important;
+}
+
+.syntaxhighlighter.tight {
+    margin: 9px 0px 9px 0px !important;
+}
+
+/* same size of the gutter non-dependent on number of digits (2 digits max) */
+.syntaxhighlighter .gutter div {
+    position: relative !important;
+    width: 20px !important;
+}
+
+.syntaxhighlighter.over100 .gutter div {
+    position: relative !important;
+    width: 30px !important;
+}

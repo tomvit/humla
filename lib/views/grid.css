@@ -1,0 +1,43 @@
+
+body {
+    overflow: visible;
+	margin-left: auto;
+	margin-right: auto;
+    margin: 20px;
+}
+
+.slide {
+    display: inline;
+    float: left;
+	
+	position: relative;
+	overflow: hidden;
+	left: auto;
+	top: auto;
+	width: 800px;			/* targeted resolution - width */
+	height: 600px;			/* targeted resolution - height */
+	
+    margin: 20px;
+
+	border: 1px solid silver;
+    zoom: 0.50;
+    opacity: 0.8;
+    cursor: pointer;
+    
+    -webkit-transition-property: opacity;
+    -webkit-transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-in-out;       
+}
+
+.slide:hover {
+    opacity: 1;
+    border: 1px solid darkgrey;
+}
+
+.slide > footer {
+    visibility: hidden;
+}
+
+.selected {
+	border: 7px solid #999999;
+}

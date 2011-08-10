@@ -1,0 +1,21 @@
+/* slideshow presentation styles */
+
+.slide.previous {
+    display: none;
+	margin-left: -1210px;
+}
+
+.slide.current {
+	display: block;
+	margin-left: 0px;
+	margin-top: 0px;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+.slide.next {
+	display: none;
+	margin-left: 410px;
+}

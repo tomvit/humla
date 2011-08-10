@@ -1,0 +1,30 @@
+CHANGES:
+
+0.2.1
+- new extension: github - a code can be linked with the code at github;
+  also stores the code in localstorage for fast loading
+- events changed to interfaces: views and extensions, events removed 
+- status of asynchronous objects loading in extensions. It is now possible
+  to check the status when all the objects are loaded. This is used by the print view
+  (which will be used when printing through wkhtmltopdf).
+- document.lastModified converted from GMT to local time 
+  (new value assigned to humla.controler.lastModified)
+
+0.2.0 
+- major refactoring of the original Humla 0.1 
+- possible to define views and extensions in config.json
+- every slide has a unique URL either with a slide number or slide id (if exists)
+- possibility to assign scripts in config.json to groups so that it is possible
+  to manage dependencies on scripts when loading
+- developed main extensions for creating outlines, importing drawings from
+  Google drawings, importing external references from a Google Spreadsheet, 
+  importing images of latex formulas, syntax highlighting
+
+TODO:
+- offline with appcache
+- server-side functions of extensions such as caching capabilities for drawing extension
+- controling of slides from a tutor for live events
+- support ajax crawling for slides
+- export slides to pdf by using wkhtmltopdf 
+- generating index for all slides in a set; the index would include ToC, all references,
+  all figures, etc. with pointers to slides. 
