@@ -37,9 +37,9 @@ After Humla has been downloaded, go to the humla directory and update submodules
 
 # Usage
 
-To run test.html in examples locally, you need to start your browser with options to run XHR on
-local files. For example, to enable Chrome to run XHR on local files start it with arguments 
-`--args --allow-file-access-from-files`. If you can access test.html at a Web server, 
+To run `test.html` in examples locally, you need to start your browser with options to run XHR on
+local files. For example, to enable Chrome to run XHR on local files start it with the argument 
+`--args --allow-file-access-from-files`. If you can access `test.html` at a Web server, 
 just point your browser to it.
 
 Use the following keys to navigate in the presentation:
