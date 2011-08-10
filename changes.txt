@@ -1,7 +1,7 @@
 CHANGES:
 
 0.2.1
-- suplementary configuration for installation-specific configuration 
+- supplementary configuration for installation-specific configuration 
 - new extension: github - a code can be linked with the code at github;
   also stores the code in localstorage for fast loading
 - events changed to interfaces: views and extensions, events removed 
