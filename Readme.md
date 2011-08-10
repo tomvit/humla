@@ -6,6 +6,8 @@ utilizing extensive HTML5 features. Humla is particularly
 useful for technical presentations and was originally created as a tool for the Czech Technical University courses Middleware and Web Services 
 and Web 2.0.
 
+To see Humla in action, go to <a href="http://vitvar.com/courses/mdw/slides/lecture1.html">Web Services and Middleware slides</a>.
+
 There is currently no IDE available, slides must be edited directly in HTML.
 
 Feel free to fork Humla, write plugins and patch it yourself!
@@ -37,8 +39,9 @@ After Humla has been downloaded, go to the humla directory and update submodules
 # Usage
 
 To run test.html in examples locally, you need to start your browser with options to run XHR on
-local files. For Chrome you start it with arguments `--args --allow-file-access-from-files`. 
-If you can access test.html at a Web server, just point your browser to it.
+local files. For example, to enable Chrome to run XHR on local files start it with arguments 
+`--args --allow-file-access-from-files`. If you can access test.html at a Web server, 
+just point your browser to it.
 
 Use the following keys to navigate in the presentation:
 
