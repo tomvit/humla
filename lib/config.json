@@ -85,14 +85,15 @@
         
         {   "id" : "syntaxhighlighter",
             "object" : "ex_syntaxhighlighter",
-            "scripts" : [ { "src" : "../support/syntaxhighlighter_3.0.83/scripts/shCore.js" },
-                          { "src" : "../support/syntaxhighlighter_3.0.83/scripts/shBrushJScript.js", "g" : 1 },
-                          { "src" : "../support/syntaxhighlighter_3.0.83/scripts/shBrushXml.js", "g" : 1 },
-                          { "src" : "../support/syntaxhighlighter_3.0.83/scripts/shBrushPlain.js", "g" : 1 },
-                          { "src" : "../support/syntaxhighlighter_3.0.83/scripts/shBrushJava.js", "g" : 1 },
-                          { "src" : "../support/syntaxhighlighter_3.0.83/scripts/shBrushBash.js", "g" : 1 },                          
-                          { "src" : "ext/syntaxhighlighter.js", "g" : 1 } ],
-            "styles"  : [ { "src" : "../support/syntaxhighlighter_3.0.83/styles/shCoreDefault.css",  "media" : "screen, print" },
+            "scripts" : [ { "src" : "../support/SyntaxHighlighter/scripts/XRegExp.js" },
+                          { "src" : "../support/SyntaxHighlighter/scripts/shCore.js", "g" : 1 },
+                          { "src" : "../support/SyntaxHighlighter/scripts/shBrushJScript.js", "g" : 2 },
+                          { "src" : "../support/SyntaxHighlighter/scripts/shBrushXml.js", "g" : 2 },
+                          { "src" : "../support/SyntaxHighlighter/scripts/shBrushPlain.js", "g" : 2 },
+                          { "src" : "../support/SyntaxHighlighter/scripts/shBrushJava.js", "g" : 2 },
+                          { "src" : "../support/SyntaxHighlighter/scripts/shBrushBash.js", "g" : 2 },                          
+                          { "src" : "ext/syntaxhighlighter.js", "g" : 2 } ],
+            "styles"  : [ { "src" : "../support/SyntaxHighlighter/styles/shCoreDefault.css",  "media" : "screen, print" },
                           { "src" : "ext/syntaxhighlighter.css", "media" : "screen, print" } ],               
             "params"  : {
                 "defaults" : [
