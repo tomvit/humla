@@ -1,4 +1,5 @@
 {
+    
     "keys" : {
         "prev"      : [33, 37],
         "next"      : [34, 39],
@@ -118,7 +119,17 @@
             "object" : "ex_rssfeed",
             "scripts" : [ { "src" : "ext/rssfeed.js" } ],
             "enabled" : true 
+        },
+        
+        {   "id" : "ga",
+            "object" : "ex_ga",
+            "scripts" : [ { "src" : "ext/ga.js" } ],
+            "params"  : {
+                "account" : "UA-xxx"
+            },
+            "enabled" : true 
         }
+        
         
     ]
     
