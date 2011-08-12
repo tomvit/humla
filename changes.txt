@@ -20,12 +20,3 @@ CHANGES:
 - developed main extensions for creating outlines, importing drawings from
   Google drawings, importing external references from a Google Spreadsheet, 
   importing images of latex formulas, syntax highlighting
-
-TODO:
-- offline with appcache
-- server-side functions of extensions such as caching capabilities for drawing extension
-- controling of slides from a tutor for live events
-- support ajax crawling for slides
-- export slides to pdf by using wkhtmltopdf 
-- generating index for all slides in a set; the index would include ToC, all references,
-  all figures, etc. with pointers to slides. 
