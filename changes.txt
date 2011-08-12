@@ -1,5 +1,8 @@
 CHANGES:
 
+0.2.2-current
+-
+
 0.2.1
 - supplementary configuration for installation-specific configuration 
 - new extension: github - a code can be linked with the code at github;
