@@ -223,7 +223,7 @@ body {
 .slide code {
     font-size: smaller;
     font-style: normal;
-    font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+    font-family: "Consolas"; /*, "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;*/
     color: DarkRed;
 }
 
@@ -360,7 +360,7 @@ body {
 #msgbox p a,
 #msgbox p {
     font-size: 14px;
-    font-family: arial;
+    font-family: "Arial";
     color: inherit;
 }
 
@@ -397,7 +397,7 @@ table.xx-small,
 
 table {
     font-size: 18px;
-	font-family: arial;
+	font-family: "Arial";
 	width: 600px;
 	border: 3px solid LightSteelBlue;
 	border-radius: 6px 6px;
@@ -444,7 +444,7 @@ table tbody tr:nth-child(even) {
     margin-left: auto;
     margin-right: auto;
     padding: 10px 10px 10px 15px;
-    font-family: Arial;
+    font-family: "Arial";
     font-size: 16px;
     font-style: normal;
     float: left;

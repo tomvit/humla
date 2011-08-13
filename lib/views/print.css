@@ -28,6 +28,10 @@ body {
 	zoom: 0.7; /* this is necessary to print on A4 because of the wrong iframe scaling */
 }
 
+div.wkhtml { /* hack for wkhtmltopdf */
+    height: 620px !important;
+}
+
 div.odd {
 	margin-top: 80px;
 	margin-bottom: 50px;
