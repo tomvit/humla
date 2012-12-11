@@ -1,17 +1,24 @@
+/**
+* Lectures.js defines API methods to retrieve list of lectures and a lecture description.
+*/
 
 var fs = require("fs");
 var crypto = require('crypto');
 var path = require('path');
 var exec = require('child_process').exec;
 
-var PJS_LECTUREDESCR = path.join(path.dirname(__filename), 'pjs_lecturedescr.js '); 
+var PJS_LECCONTENTS = path.join(path.dirname(__filename), 'pjs_leccontents.js '); 
+var PJS_ALLSLIDES   = path.join(path.dirname(__filename), 'pjs_allslides.js '); 
 
+// Lectures class
 var Lectures = function(config) {
 
+	// config from config.json
 	this.config = config;
+	
+	// internal in-memory cache for lecture descriptions
 	this.cache = {};
 
-	// API methods, they must correspond to the definition in config.json	
 	// retrieves all lectures from a set lectureSet
 	this.getAllLectures = function(lectureSet, ondataready) {
 		var lectures = fs.readdirSync(this.config.PUBLIC_HTML + "/slides/" + lectureSet);
@@ -20,14 +27,18 @@ var Lectures = function(config) {
 		for (var i = 0; i < lectures.length; i++) {
 			if (lectures[i].match("^lecture[0-9]+.html")) 
 				alllectures.push({ 
-					id 		: lectures[i],
-					uri 	: "http://" + config.HOSTNAME.replace(/\/?$/, "") + "/api/lectures/" + lectureSet + "/" + lectures[i],
-					lecture : "http://" + config.HOSTNAME.replace(/\/?$/, "") + "/slides/" 		 + lectureSet + "/" + lectures[i] } );					
+					id 				: lectures[i],
+					contents 	: "http://" + config.HOSTNAME.replace(/\/?$/, "") + "/api/lectures/" + lectureSet + "/" + 
+										lectures[i] + "/contents",
+					slides 		: "http://" + config.HOSTNAME.replace(/\/?$/, "") + "/api/lectures/" + lectureSet + "/" + 
+										lectures[i] + "/slides",
+					view 		: "http://" + config.HOSTNAME.replace(/\/?$/, "") + "/slides/" 		 + 
+										lectureSet + "/" + lectures[i] } );					
 		}
 
 		alllectures.sort(function(a,b) {
-			var p = new RegExp(/.*lecture([0-9]+).html$/);
-			var m1 = p.exec(a.uri), m2 = p.exec(b.uri);
+			var p = new RegExp(/.*lecture([0-9]+).html.*$/);
+			var m1 = p.exec(a.contents), m2 = p.exec(b.contents);
 			if (m1 && m1.length > 0 && m2 && m2.length > 0) {
 				an = parseInt(m1[1]);
 				bn = parseInt(m2[1]);
@@ -48,6 +59,7 @@ var Lectures = function(config) {
 			return result;
 	}
 	
+	// get the etags for the lecture set
 	this.getAllLectures_etag = function(lectureSet) {
 		var al = this.getAllLectures(lectureSet, null);
 		var md5sum = crypto.createHash('md5');
@@ -59,13 +71,31 @@ var Lectures = function(config) {
 		return { etag: md5sum.digest('hex') };
 	} 	
 	
-	this.getLectureData = function(lectureId, ondataready) {
+	this.getAllSlides = function(lectureId, ondataready) {
 	 	var lecture_url = "http://" + this.config.HOSTNAME + "/slides/" + lectureId;
 	 	
-	 	var etag = this.getLectureData_etag(lectureId);
+	 	this.config.execute_pjs(PJS_ALLSLIDES, lecture_url, 
+	 		function(data) {
+	 			ondataready(JSON.parse(data), null);
+	 		}, 
+	 		function (error) {
+	 			ondataready(null, error);
+	 		}
+	 	);
+	}
+	
+	this.getAllSlides_etag = function(lectureid) {
+		return null;
+	}	
+	
+	// get a lecture description for lecture id
+	this.getLectureContents = function(lectureId, ondataready) {
+	 	var lecture_url = "http://" + this.config.HOSTNAME + "/slides/" + lectureId;
+	 	
+	 	var etag = this.getLectureContents_etag(lectureId);
 	 	if (!this.cache[lectureId] || !this.cache[lectureId].data || this.cache[lectureId].etag != etag) {
 	 		var cache = this.cache;
-		 	this.config.execute_pjs(PJS_LECTUREDESCR, lecture_url, 
+		 	this.config.execute_pjs(PJS_LECCONTENTS, lecture_url, 
 		 		function(data) {
 		 			cache[lectureId] = { data: JSON.parse(data), etag : etag };
 		 			ondataready(cache[lectureId].data, null);
@@ -78,7 +108,8 @@ var Lectures = function(config) {
 			ondataready(this.cache[lectureId].data, null);
 	}
 
-	this.getLectureData_etag = function(lectureId) {
+	// get etag for the description of lecture lectureid
+	this.getLectureContents_etag = function(lectureId) {
 		var st = fs.statSync(this.config.PUBLIC_HTML + "/slides/" + lectureId);
 		if (st) {
 			var md5sum = crypto.createHash('md5');

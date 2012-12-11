@@ -33,15 +33,33 @@
 				  		"lecture-set" : "[A-Za-z0-9\\-\\_]+"
 				  	} 
 				},
-				{ "name" 	: "getLectureData",
-				  "path" 	: "api/lectures/{lecture-id}",
+		  		{ "name" 	: "getAllSlides",
+				  "path" 	: "api/lectures/{lecture-id}/slides",
+				  "params" 	: 
+				  	{ 
+				  		"lecture-id" : "[A-Za-z0-9\\.\\-\\_/]+"
+				  	} 
+				},
+				{ "name" 	: "getLectureContents",
+				  "path" 	: "api/lectures/{lecture-id}/contents",
 				  "params" 	: 
 				  	{ 
 				  		"lecture-id" : "[A-Za-z0-9\\.\\-\\_/]+" 
 				  	} 
 				}				 
 			]
+		},
+		
+		{ "id" 			: "sitemap",
+		  "enabled"		: true, 
+		  "services" 	: 
+		  	[ 
+		  		{ "name" 	: "getSitemap",
+				  "path" 	: "api/sitemap"
+				}
+			]
 		}
+		
 	] 
 }
 

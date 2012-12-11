@@ -1,8 +1,14 @@
+/**
+* Extensions.js defines a class that allows to load definitions of extensions from config.json
+* load an extension handler for each extension and find methods to perform particular API requests.
+*/
 
 var exec = require('child_process').exec;
 
+// Extension class
 var Extensions = function(config) {
 
+	// remember the configuration
 	this.config = config;
 	
 	// function to execute external phantom js commands to retrieve AJAX content
@@ -18,6 +24,15 @@ var Extensions = function(config) {
 			}
 		);	
 	}
+	
+	// function to retrieve handler based on id
+	this.config.searchHandler = function(id) {
+		for (var i = 0; i < this.extensions.length; i++) {
+			if (this.extensions[i].id === "lectures") 
+				return this.extensions[i].handler;
+		}
+		return null;
+	}
 
 	// constructs a pattern for a path based on a service definition 
 	var createPathPattern = function(service) {
@@ -27,7 +42,9 @@ var Extensions = function(config) {
 		return path;
 	}
 	
-	// read extensions from data
+	// read extensions from config
+	// this will load handler from the extension library and creates patterns
+	// that are later used to resolve url paths
 	for (var i = 0; i < this.config.extensions.length; i++) {
 		try {
 			if (this.config.extensions[i].enabled) {
@@ -45,6 +62,7 @@ var Extensions = function(config) {
 		}
 	}
 	
+	// retrieves a definition of a method that can be used to handle the request descirbed by url
 	this.getMethod = function(url, etag) {
 	
 		for (var i = 0; i < this.config.extensions.length; i++) {
@@ -78,6 +96,7 @@ var Extensions = function(config) {
 		return null;
 	}
 	
+	// retrieves the resources representation that corresponds to the url
 	this.getResource = function(url, ondataready) {
 		var m = this.getMethod(url, false);
 		if (m) {
@@ -88,6 +107,7 @@ var Extensions = function(config) {
 			return null;
 	}
 
+	// retrieves etag for the resource representation that corresponds to the url
 	this.getResource_etag = function(url) {
 		var m = this.getMethod(url, true);
 		if (m)

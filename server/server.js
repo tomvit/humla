@@ -1,21 +1,34 @@
+/**
+* Humla Server v0.1
+* Humla server provides server side functionality for Humla HTML5 presentations
+* such as AJAX crawling and a specialized functionality via Humla API. 
+*
+* Tomas Vitvar, tomas@vitvar.com
+**/
 
+// import libraries
 var http = require('http'),
     path = require('path'),
     exec = require('child_process').exec,
     paperboy = require('paperboy'),
     url = require('url'),
     fs = require('fs');
-    
+
+// server version    
 var SERVER_VERSION = "0.1";
     
+// main configuration file from config.json
 var config = JSON.parse(fs.readFileSync(path.join(path.dirname(__filename), "config.json")));
 config.PUBLIC_HTML = path.join(path.dirname(__filename), config.PUBLIC_HTML);
 
+// load extension modules as defined in config.json
 var emodule = require('./extensions.js');
 var extensions = new emodule.Extensions(config);    
 
+// phatnom.js script to retrieve AJAX content from Humla slides
 var PJS_SLIDEHTML = path.join(path.dirname(__filename), 'pjs_slidehtml.js ');
 
+// creates and runs the server
 http.createServer(
 	function (req, res) {
 		// parse the request URL
@@ -23,11 +36,12 @@ http.createServer(
 	
 	    // ajax crawling of a single humla slide
 	    if (urlp.query && urlp.query["_escaped_fragment_"]) {
+	    	// URL to request AJAX content based from AXAJ crawling request
 	 		hurl = "http://" + config.HOSTNAME + "/" + urlp.pathname + "#" + urlp.query["_escaped_fragment_"];
 			config.execute_pjs(PJS_SLIDEHTML, hurl, 
 				function(data) {
 					res.writeHead(200);
-					res.end(stdout);
+					res.end(data);
 				},
 				function(error) {
 					console.log(error);
@@ -56,7 +70,7 @@ http.createServer(
 		
 		// retrieve API resource content
 		extensions.getResource(urlp, 
-			function(data, error) {
+			function(data, error, format) {
 				if (error) {
 					console.log(error);
 					res.writeHead(500);
@@ -64,8 +78,11 @@ http.createServer(
 					return;
 				}
 				
+				if (!format)
+					format = 'application/json';
+									
 				var headers = {};
-				headers['Content-Type']  = 'application/json';
+				headers['Content-Type']  = format;
 				if (etag) {
 					headers['Cache-Control'] = 'public max-age=3600';
 					headers['ETag'] = '"' + etag.etag + '"';
@@ -74,7 +91,10 @@ http.createServer(
 			
 				res.writeHead(200, headers);
 				if (data)
-					res.end(JSON.stringify(data));
+					if (format == 'application/json')
+						res.end((typeof data=="object") ? JSON.stringify(data) : data);
+					else
+						res.end(data);
 				else
 					res.end();
 				return;
