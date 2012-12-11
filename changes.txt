@@ -1,7 +1,14 @@
 CHANGES:
 
-0.2.2-current
--
+0.3 - current
+- first version of humla server v0.1
+- ajax crawling via phantomjs 
+- !# used in fragments on slides when ajax crawling is enabled by the server
+- Humla server extensionsible model
+- Humla server extensions implementing APIs for selected resources (currently read-only, i.e. GET)
+  such as all lectures in a set, lecture descriptions, sitemap
+- title drawings retrieved via humla API
+- http caching (via etags) and in-memory server-side caching for lectures' descriptions
 
 0.2.1
 - supplementary configuration for installation-specific configuration 
