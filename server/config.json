@@ -1,0 +1,47 @@
+
+{ "SERVER_IP" 		: "127.0.0.1",
+  "SERVER_PORT"		: "8081",
+
+  "PUBLIC_HTML"		: "../../public_html",
+  "HOSTNAME"		: "humla.vitvar.com",
+  "PHANTOMJS"		: "/home/vitvatom/bin/phantomjs/bin/phantomjs",
+ 
+  "extensions" 	: 
+	[ 
+		{ "id" 			: "drawing",
+		  "enabled"		: true,
+		  "services" 	: 
+		  	[ 
+		  		{ "name" 	: "getTitle",
+				  "path" 	: "api/drawing/{drawing-id}/title",
+				  "params" 	: 
+	              	{ 
+	              		"drawing-id" : "[A-Za-z0-9\\.\\-\\_]+" 
+	              	} 
+				} 
+			]
+		},
+		
+		{ "id" 			: "lectures",
+		  "enabled"		: true, 
+		  "services" 	: 
+		  	[ 
+		  		{ "name" 	: "getAllLectures",
+				  "path" 	: "api/lectures/{lecture-set}/all",
+				  "params" 	: 
+				  	{ 
+				  		"lecture-set" : "[A-Za-z0-9\\-\\_]+"
+				  	} 
+				},
+				{ "name" 	: "getLectureData",
+				  "path" 	: "api/lectures/{lecture-id}",
+				  "params" 	: 
+				  	{ 
+				  		"lecture-id" : "[A-Za-z0-9\\.\\-\\_/]+" 
+				  	} 
+				}				 
+			]
+		}
+	] 
+}
+
