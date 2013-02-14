@@ -23,7 +23,7 @@ Feel free to fork Humla, write plugins and patch it yourself!
 
 # Server
   
-  * Humla server writen in node.js
+  * Humla server writen in node.js 
   * Supports: AJAX crawling of individual slides, server-side code for humla extensions (e.g. drawing retrieves Google drawing name).
   * Humla API: list all lectures, list content of a lecture, sitemap. 
 
