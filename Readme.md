@@ -4,22 +4,28 @@ Humla is an open source project of HTML5 presentation environment inspired by HT
 Similarly as Beamer exist for Latexers, Humla'a aim is to provide environment for creating slides for presentations in HTML while 
 utilizing extensive HTML5 features. Humla is particularly 
 useful for technical presentations and was originally created as a tool for the Czech Technical University courses Middleware and Web Services 
-and Web 2.0. To see Humla in action, see <a href="http://vitvar.com/courses/mdw/slides/lecture1.html">Lecture 1 of 
+and Web 2.0. To see Humla in action, see <a href="http://humla.vitvar.com/slides/mdw/lecture1.html">Lecture 1 of 
 Web Services and Middleware</a> course.
 
 There is currently no IDE available, slides must be edited directly in HTML.
 
 Feel free to fork Humla, write plugins and patch it yourself!
 
-# Features
+# Client 
 
   * Every slide has a unique URL.
   * Plugin architecture with views and extensions. 
-  * A view allows to define the way how slides are presented; there is currently a browsing view 
+  * A view defines how slides can be presented; there is currently a browsing view 
     for convenient slides browsing, a slideshow view for presentations, a grid view for overview of slides in a presentation,
     and a print view for printing slides.
   * An extension defines processing of slides' content such as for replacment of variables, online integration with pictures from 
     Google Drawing, online integration with github to display a code, Latex formulas, etc.
+
+# Server
+  
+  * Humla server writen in node.js
+  * Supports: AJAX crawling of individual slides, server-side code for humla extensions (e.g. drawing retrieves Google drawing name).
+  * Humla API: list all lectures, list content of a lecture, sitemap. 
 
 # Browser Support
 
@@ -52,7 +58,7 @@ Use the following keys to navigate in the presentation:
   * `e` shows the last error if any
   * `d` toggles the debug mode
 
-See <a href="http://vitvar.com/courses/mdw/slides/lecture1.html">Lecture 1 of Web Services and Middleware</a> 
+See <a href="http://humla.vitvar.com/slides/mdw/lecture1.html">Lecture 1 of Web Services and Middleware</a> 
 course for more information on how Humla can be used for making presentations.
 
 # License

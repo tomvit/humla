@@ -108,6 +108,10 @@ http.createServer(
 				return;
 			}
 		);
+
+		// TODO: create pdf is modified or does not exist
+		// it is possible to use the script pjs_printpdf.js, however, it only creates pdf from image
+		// hence the resulting pdf is first pretty big and second is not searchable.
 			
 		// deliver slides if not an API request
 	    if (!urlp.pathname.match("^/api.*"))
