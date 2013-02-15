@@ -25,7 +25,7 @@ var Drawing = function(config) {
     					ondataready({ id: drawingId, title: title }, null);
     				}
     			} else 
-    				ondataready(null, "Error while retrieving a drawing title, id=" + did + " status code=" + dres.statusCode);
+    				ondataready(null, "Error while retrieving a drawing title, id=" + drawingId + " status code=" + dres.statusCode);
     		}
     	);
     	

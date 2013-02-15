@@ -22,7 +22,7 @@ var Sitemap = function(config) {
 				
 				for (var i = 0; i < slides.length; i++) {
 					sm += '<url>\n';
-					sm += '<loc>' + slides[i] + '</loc>\n';
+					sm += '<loc>' + slides[i].replace(/#[^!]{1,1}/, '#!/') + '</loc>\n';
 					sm += '</url>\n';
 				}
 				sm += '</urlset>\n';

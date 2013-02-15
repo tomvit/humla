@@ -13,13 +13,21 @@ var http = require('http'),
     paperboy = require('paperboy'),
     url = require('url'),
     fs = require('fs');
-
-// server version    
-var SERVER_VERSION = "0.1";
-    
+            
 // main configuration file from config.json
 var config = JSON.parse(fs.readFileSync(path.join(path.dirname(__filename), "config.json")));
 config.PUBLIC_HTML = path.join(path.dirname(__filename), config.PUBLIC_HTML);
+
+// global constants    
+config.SERVER_VERSION = "0.1";
+
+// check the presence of phantomjs, AJAX crawling and some APIs can only be allowed if phantomjs is present    
+if (!fs.statSync(config.PHANTOMJS)) {
+	console.log(
+		util.format("Cannot find phantomjs (%s), axaj crawling and some APIs will be disabled!", config.PHANTONJS));
+	config.PHANTOMJS_EXISTS = false;
+} else
+	config.PHANTOMJS_EXISTS = true;  
 
 // load extension modules as defined in config.json
 var emodule = require('./extensions.js');
@@ -105,7 +113,7 @@ http.createServer(
 	    if (!urlp.pathname.match("^/api.*"))
 	    	paperboy.deliver(config.PUBLIC_HTML, req, res)
 	        	.addHeader('Cache-Control', "public, max-age=3600")
-				.addHeader("Server", "Humla-Server v" + SERVER_VERSION + "; ajax-crawling=true")
+				.addHeader("Server", "Humla-Server v" + config.SERVER_VERSION + "; ajax-crawling=" + config.PHANTOMJS_EXISTS)
 	           	.otherwise(function(err) {
 	            	res.writeHead(404);
 	            	res.end();
