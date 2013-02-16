@@ -122,15 +122,15 @@ http.createServer(
 					hurl = "http://" + config.HOSTNAME + "/" + urlp.pathname.replace(".pdf", ".html") + "#/1/v4";
                         		config.execute_pjs(PJS_PRINTPDF, [ hurl, fpdf ],
                                 		function(data) {
-							// return the pdf when ready
-							paperboy.deliver(config.PUBLIC_HTML, req, res).
-								otherwise(function(err) {
-                        						res.writeHead(404);
-                        						res.end();
-                        					});
-						},
+											// return the pdf when ready
+											paperboy.deliver(config.PUBLIC_HTML, req, res).
+												otherwise(function(err) {
+				                        						res.writeHead(404);
+				                        						res.end();
+				                        					});
+										},
                                 		function(error) {
-							// log error
+												// log error
                                         		console.log(error);
                                         		res.writeHead(500);
                                         		res.end();
