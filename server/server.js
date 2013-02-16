@@ -111,12 +111,12 @@ http.createServer(
 		);
 
 		// create pdf 
-		if (urlp.pathname.match("^.*/lecture[0-9].pdf$")) {
+		if (urlp.pathname.match("^.*/lecture[0-9]{1,2}\.pdf$")) {
 			// check if pdf exists and if the date matches the html date
 			fpdf = config.PUBLIC_HTML + "" + urlp.pathname;
 			fhtm = config.PUBLIC_HTML + "" + urlp.pathname.replace(".pdf", ".html");
 			if (path.existsSync(fhtm)) {
-				var genpdf = !path.existsSync(fpdf) || urlp.query.hasOwnProperty('refresh');
+				var genpdf = !path.existsSync(fpdf) || urlp.query.hasOwnProperty('ref');
 				
 				if (genpdf) {
 					hurl = "http://" + config.HOSTNAME + "/" + urlp.pathname.replace(".pdf", ".html") + "#/1/v4";
