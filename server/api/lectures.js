@@ -74,7 +74,7 @@ var Lectures = function(config) {
 	this.getAllSlides = function(lectureId, ondataready) {
 	 	var lecture_url = "http://" + this.config.HOSTNAME + "/slides/" + lectureId;
 	 	
-	 	this.config.execute_pjs(PJS_ALLSLIDES, lecture_url, 
+	 	this.config.execute_pjs(PJS_ALLSLIDES, [lecture_url], 
 	 		function(data) {
 	 			ondataready(JSON.parse(data), null);
 	 		}, 
@@ -95,7 +95,7 @@ var Lectures = function(config) {
 	 	var etag = this.getLectureContents_etag(lectureId);
 	 	if (!this.cache[lectureId] || !this.cache[lectureId].data || this.cache[lectureId].etag != etag) {
 	 		var cache = this.cache;
-		 	this.config.execute_pjs(PJS_LECCONTENTS, lecture_url, 
+		 	this.config.execute_pjs(PJS_LECCONTENTS, [lecture_url], 
 		 		function(data) {
 		 			cache[lectureId] = { data: JSON.parse(data), etag : etag };
 		 			ondataready(cache[lectureId].data, null);

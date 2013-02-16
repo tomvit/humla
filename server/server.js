@@ -35,18 +35,19 @@ var extensions = new emodule.Extensions(config);
 
 // phatnom.js script to retrieve AJAX content from Humla slides
 var PJS_SLIDEHTML = path.join(path.dirname(__filename), 'pjs_slidehtml.js ');
+var PJS_PRINTPDF = path.join(path.dirname(__filename), 'pjs_printpdf.js ');
 
 // creates and runs the server
 http.createServer(
 	function (req, res) {
-		// parse the request URL
-		var urlp = url.parse(req.url, true);
+             // parse the request URL
+	     var urlp = url.parse(req.url, true);
 	
 	    // ajax crawling of a single humla slide
 	    if (urlp.query && urlp.query["_escaped_fragment_"]) {
 	    	// URL to request AJAX content based from AXAJ crawling request
 	 		hurl = "http://" + config.HOSTNAME + "/" + urlp.pathname + "#" + urlp.query["_escaped_fragment_"];
-			config.execute_pjs(PJS_SLIDEHTML, hurl, 
+			config.execute_pjs(PJS_SLIDEHTML, [ hurl ], 
 				function(data) {
 					res.writeHead(200);
 					res.end(data);
@@ -109,9 +110,36 @@ http.createServer(
 			}
 		);
 
-		// TODO: create pdf is modified or does not exist
-		// it is possible to use the script pjs_printpdf.js, however, it only creates pdf from image
-		// hence the resulting pdf is first pretty big and second is not searchable.
+		// create pdf 
+		if (urlp.pathname.match("^.*/lecture[0-9].pdf$")) {
+			// check if pdf exists and if the date matches the html date
+			fpdf = config.PUBLIC_HTML + "" + urlp.pathname;
+			fhtm = config.PUBLIC_HTML + "" + urlp.pathname.replace(".pdf", ".html");
+			if (path.existsSync(fhtm)) {
+				var genpdf = !path.existsSync(fpdf) || urlp.query.hasOwnProperty('refresh');
+				
+				if (genpdf) {
+					hurl = "http://" + config.HOSTNAME + "/" + urlp.pathname.replace(".pdf", ".html") + "#/1/v4";
+                        		config.execute_pjs(PJS_PRINTPDF, [ hurl, fpdf ],
+                                		function(data) {
+							// return the pdf when ready
+							paperboy.deliver(config.PUBLIC_HTML, req, res).
+								otherwise(function(err) {
+                        						res.writeHead(404);
+                        						res.end();
+                        					});
+						},
+                                		function(error) {
+							// log error
+                                        		console.log(error);
+                                        		res.writeHead(500);
+                                        		res.end();
+                                		}
+                        		);
+					return;	
+				}
+			}	
+		}
 			
 		// deliver slides if not an API request
 	    if (!urlp.pathname.match("^/api.*"))

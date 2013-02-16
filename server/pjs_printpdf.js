@@ -6,6 +6,7 @@ var page = require('webpage').create(),
     output = system.args[2];
     page.viewportSize = { width: 600, height: 600 };
     page.paperSize = { format: 'A4', orientation: 'portrait', margin: '2.3cm' };
+    page.zoomFactor = 1.5;
 
     page.open(address, function (status) {
         if (status !== 'success') {
@@ -15,6 +16,6 @@ var page = require('webpage').create(),
             window.setTimeout(function () {
                 page.render(output);
                 phantom.exit();
-            }, 2000);
+            }, 3000);
         }
     });

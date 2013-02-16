@@ -12,8 +12,11 @@ var Extensions = function(config) {
 	this.config = config;
 	
 	// function to execute external phantom js commands to retrieve AJAX content
-	this.config.execute_pjs = function(pjs_script, url, onready, onerror) {
-		var cmd = this.PHANTOMJS + " " + pjs_script + url; 	
+	this.config.execute_pjs = function(pjs_script, params, onready, onerror) {
+		var cmd = this.PHANTOMJS + " " + pjs_script;
+		for (var i = 0; i < params.length; i++)
+			cmd += " " + params[i];
+
 		exec(cmd, 
 			function (error, stdout, stderr) {
 				if (!error) {
