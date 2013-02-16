@@ -23,7 +23,7 @@ Feel free to fork Humla, write plugins and patch it yourself!
 
 # Server
   
-  * Humla server writen in node.js
+  * Humla server writen in node.js 
   * Supports: AJAX crawling of individual slides, server-side code for humla extensions (e.g. drawing retrieves Google drawing name).
   * Humla API: list all lectures, list content of a lecture, sitemap. 
 
@@ -60,6 +60,13 @@ Use the following keys to navigate in the presentation:
 
 See <a href="http://humla.vitvar.com/slides/mdw/lecture1.html">Lecture 1 of Web Services and Middleware</a> 
 course for more information on how Humla can be used for making presentations.
+
+# Printing to PDF
+
+Humla server supports printing of slides to PDF by using phantomjs. This requires installation of fonts 
+at a node where the PDF generation occurs. The current Humla styles use Times New Roman 
+for all text, Arial for text in tables and Consolas for code snippets.
+
 
 # License
 The GPL version 3, http://www.gnu.org/licenses/gpl.txt
