@@ -116,21 +116,33 @@ http.createServer(
 			fpdf = config.PUBLIC_HTML + "" + urlp.pathname;
 			fhtm = config.PUBLIC_HTML + "" + urlp.pathname.replace(".pdf", ".html");
 			if (path.existsSync(fhtm)) {
-				var genpdf = !path.existsSync(fpdf) || urlp.query.hasOwnProperty('ref');
+				var genpdf = !path.existsSync(fpdf) || urlp.query.hasOwnProperty('rel');
+
+				if (!genpdf && path.existsSync(fpdf) && path.existsSync(fhtm) ) {
+					opdf = fs.statSync(fpdf);
+					ohtm = fs.statSync(fhtm);
+					mp = JSON.stringify(opdf.mtime);
+					mh = JSON.stringify(ohtm.mtime);
+					genpdf = (mp != mh);
+				}
 				
 				if (genpdf) {
 					hurl = "http://" + config.HOSTNAME + "/" + urlp.pathname.replace(".pdf", ".html") + "#/1/v4";
                         		config.execute_pjs(PJS_PRINTPDF, [ hurl, fpdf ],
                                 		function(data) {
-											// return the pdf when ready
-											paperboy.deliver(config.PUBLIC_HTML, req, res).
-												otherwise(function(err) {
-				                        						res.writeHead(404);
-				                        						res.end();
-				                        					});
-										},
+							// set the modification date of pdf file to be the same as the html file
+							exec("touch -m -d \"$(stat " + fhtm + " | grep 'Modify: ' | sed s/Modify:.//)\" " + fpdf,
+								function(error, stdout, stderr) { if (error) console.log(stderr); } );
+
+							// return the pdf when ready
+							paperboy.deliver(config.PUBLIC_HTML, req, res).
+								otherwise(function(err) {
+                        						res.writeHead(404);
+                        						res.end();
+                        					});
+						},
                                 		function(error) {
-												// log error
+							// log error
                                         		console.log(error);
                                         		res.writeHead(500);
                                         		res.end();
