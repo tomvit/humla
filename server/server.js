@@ -46,7 +46,7 @@ http.createServer(
 	    // ajax crawling of a single humla slide
 	    if (urlp.query && urlp.query["_escaped_fragment_"]) {
 	    	// URL to request AJAX content based from AXAJ crawling request
-	 		hurl = "http://" + config.HOSTNAME + "/" + urlp.pathname + "#" + urlp.query["_escaped_fragment_"];
+	 		hurl = "http://" + config.HOSTNAME + ":" + config.SERVER_PORT + "/" + urlp.pathname + "#" + urlp.query["_escaped_fragment_"];
 			config.execute_pjs(PJS_SLIDEHTML, [ hurl ], 
 				function(data) {
 					res.writeHead(200);
@@ -127,7 +127,7 @@ http.createServer(
 				}
 				
 				if (genpdf) {
-					hurl = "http://" + config.HOSTNAME + "/" + urlp.pathname.replace(".pdf", ".html") + "#/1/v4";
+                            hurl = "http://" + config.HOSTNAME + ":" + config.SERVER_PORT + "/" + urlp.pathname.replace(".pdf", ".html") + "#/1/v4";
                         		config.execute_pjs(PJS_PRINTPDF, [ hurl, fpdf ],
                                 		function(data) {
 							// set the modification date of pdf file to be the same as the html file
