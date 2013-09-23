@@ -235,6 +235,16 @@ body {
     -webkit-column-break-inside: avoid-column;
 }
 
+/* change margin for syntaxhighlighter when there are two columns */
+.slide .columns-2 > div > div.syntaxhighlighter {
+    margin-top: 0px !important;
+}
+
+.columns-2 {
+    padding-top: 10px;
+}
+
+
 .slide > ul.columns-2 li {
 /*    margin-left: 30px;*/
 }
