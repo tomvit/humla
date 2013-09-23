@@ -116,7 +116,7 @@ http.createServer(
 			fpdf = config.PUBLIC_HTML + "" + urlp.pathname;
 			fhtm = config.PUBLIC_HTML + "" + urlp.pathname.replace(".pdf", ".html");
 			if (path.existsSync(fhtm)) {
-				var genpdf = !path.existsSync(fpdf) || urlp.query.hasOwnProperty('rel');
+				var genpdf = !path.existsSync(fpdf) || urlp.query.hasOwnProperty('abc');
 
 				if (!genpdf && path.existsSync(fpdf) && path.existsSync(fhtm) ) {
 					opdf = fs.statSync(fpdf);
