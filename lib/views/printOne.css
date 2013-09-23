@@ -1,0 +1,40 @@
+/*@page { size: landscape; }*/
+
+body {
+	overflow: visible;
+	background-color: white;
+	margin: 0;
+	padding: 0;
+}
+
+.slide {
+	display: block;
+	
+	position: relative;
+	overflow: hidden;
+	left: auto;
+	top: auto;
+	width: 800px;			/* targeted resolution - width */
+	height: 600px;			/* targeted resolution - height */
+	margin-top: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 0px;
+
+	border: 1px solid silver;
+	
+	-webkit-box-shadow: none;
+
+	zoom: 0.7; /* this is necessary to print on A4 because of the wrong iframe scaling */
+
+	page-break-after: always;
+}
+
+div.wkhtml { /* hack for wkhtmltopdf */
+    height: 620px !important;
+}
+
+.h-github .toolbar2-visible,
+.h-github .toolbar2 {
+    visibility: hidden;
+}
