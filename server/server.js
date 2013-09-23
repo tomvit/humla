@@ -111,14 +111,14 @@ http.createServer(
 		);
 
 		// create pdf 
-		if (urlp.pathname.match("^.*/lecture[0-9]{1,2}\.pdf$")) {
+		var generatePDF = function(version, suffix){
 			// check if pdf exists and if the date matches the html date
 			fpdf = config.PUBLIC_HTML + "" + urlp.pathname;
-			fhtm = config.PUBLIC_HTML + "" + urlp.pathname.replace(".pdf", ".html");
-			if (path.existsSync(fhtm)) {
-				var genpdf = !path.existsSync(fpdf) || urlp.query.hasOwnProperty('abc');
+			fhtm = config.PUBLIC_HTML + "" + urlp.pathname.replace(suffix, ".html");
+			if (fs.existsSync(fhtm)) {
+				var genpdf = !fs.existsSync(fpdf) || urlp.query.hasOwnProperty('rel');
 
-				if (!genpdf && path.existsSync(fpdf) && path.existsSync(fhtm) ) {
+				if (!genpdf && fs.existsSync(fpdf) && fs.existsSync(fhtm) ) {
 					opdf = fs.statSync(fpdf);
 					ohtm = fs.statSync(fhtm);
 					mp = JSON.stringify(opdf.mtime);
@@ -127,7 +127,7 @@ http.createServer(
 				}
 				
 				if (genpdf) {
-					hurl = "http://" + config.HOSTNAME + "/" + urlp.pathname.replace(".pdf", ".html") + "#/1/v4";
+					hurl = "http://" + config.HOSTNAME + "/" + urlp.pathname.replace(suffix, ".html") + "#/1/v" + version;
                         		config.execute_pjs(PJS_PRINTPDF, [ hurl, fpdf ],
                                 		function(data) {
 							// set the modification date of pdf file to be the same as the html file
@@ -150,7 +150,16 @@ http.createServer(
                         		);
 					return;	
 				}
-			}	
+			}
+		}
+
+		// create pdf 
+		if (urlp.pathname.match("^.*/lecture[0-9]{1,2}\.pdf$")) {
+			generatePDF("4", ".pdf");
+		}
+
+		if (urlp.pathname.match("^.*/lecture[0-9]{1,2}_v5\.pdf$")) {
+			generatePDF("5", "_v5.pdf");
 		}
 			
 		// deliver slides if not an API request
