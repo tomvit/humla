@@ -111,7 +111,7 @@ http.createServer(
 		);
 
 		// create pdf 
-		if (urlp.pathname.match("^.*/lecture[0-9]{1,2}\.pdf$")) {
+		if (urlp.pathname.match("^.*\.pdf$")) {
 			// check if pdf exists and if the date matches the html date
 			fpdf = config.PUBLIC_HTML + "" + urlp.pathname;
 			fhtm = config.PUBLIC_HTML + "" + urlp.pathname.replace(".pdf", ".html");
