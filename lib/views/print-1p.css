@@ -16,16 +16,16 @@ body {
 	top: auto;
 	width: 800px;			/* targeted resolution - width */
 	height: 600px;			/* targeted resolution - height */
-	margin-top: 0px;
+	margin-top: 20px;
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom: 0px;
+	margin-bottom: 20px;
 
 	border: 1px solid silver;
 	
 	-webkit-box-shadow: none;
 
-	zoom: 0.7; /* this is necessary to print on A4 because of the wrong iframe scaling */
+	zoom: 0.95; /* this is necessary to print on A4 because of the wrong iframe scaling */
 
 	page-break-after: always;
 }

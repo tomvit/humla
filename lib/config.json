@@ -42,16 +42,16 @@
         }, 
 
         {   "id"     : "4", 
-            "object" : "view_print",        
-            "script" : { "src" : "views/print.js" }, 
-            "style"  : { "src" : "views/print.css", "media" : "screen, print" },  
+            "object" : "view_print2p",        
+            "script" : { "src" : "views/print-2p.js" }, 
+            "style"  : { "src" : "views/print-2p.css", "media" : "screen, print" },  
             "keys_disabled" : ["prev", "next", "first", "last", "goto"]             
         }, 
 
         {   "id"     : "5", 
-            "object" : "view_printOne",        
-            "script" : { "src" : "views/printOne.js" }, 
-            "style"  : { "src" : "views/printOne.css", "media" : "screen, print" },  
+            "object" : "view_print1p",        
+            "script" : { "src" : "views/print-1p.js" }, 
+            "style"  : { "src" : "views/print-1p.css", "media" : "screen, print" },  
             "keys_disabled" : ["prev", "next", "first", "last", "goto"]             
         }
         
