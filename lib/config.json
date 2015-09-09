@@ -8,6 +8,7 @@
         "goto"      : [],
         "search"    : [],
         "tdebug"    : [68],
+        "tmenu"     : [77],
         "spare"     : [84],
         "terrs"     : [69],        
         "view1"     : [49, 116],
