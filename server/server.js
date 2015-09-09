@@ -110,15 +110,19 @@ http.createServer(
 			}
 		);
 
-		// create pdf 
-		var generatePDF = function(version, suffix){
-			// check if pdf exists and if the date matches the html date
+		// create pdf
+		var re = new RegExp("^.*/lecture[0-9]{1,2}\-([1-2]{1,1})p\.pdf$");
+	  	var match = re.exec(urlp.pathname);
+		if (match) {
+			var view = match[1] == "1" ? 5 : 4;
+			var suffix = "-" + match[1] + "p.pdf"; 
+
 			fpdf = config.PUBLIC_HTML + "" + urlp.pathname;
 			fhtm = config.PUBLIC_HTML + "" + urlp.pathname.replace(suffix, ".html");
-			if (fs.existsSync(fhtm)) {
-				var genpdf = !fs.existsSync(fpdf) || urlp.query.hasOwnProperty('rel');
+			if (path.existsSync(fhtm)) {
+				var genpdf = !path.existsSync(fpdf) || urlp.query.hasOwnProperty('rel');
 
-				if (!genpdf && fs.existsSync(fpdf) && fs.existsSync(fhtm) ) {
+				if (!genpdf && path.existsSync(fpdf) && path.existsSync(fhtm) ) {
 					opdf = fs.statSync(fpdf);
 					ohtm = fs.statSync(fhtm);
 					mp = JSON.stringify(opdf.mtime);
@@ -127,9 +131,9 @@ http.createServer(
 				}
 				
 				if (genpdf) {
-					hurl = "http://" + config.HOSTNAME + "/" + urlp.pathname.replace(suffix, ".html") + "#/1/v" + version;
-                        		config.execute_pjs(PJS_PRINTPDF, [ hurl, fpdf ],
-                                		function(data) {
+					hurl = "http://" + config.HOSTNAME + ":" + config.SERVER_PORT + "/" + urlp.pathname.replace(suffix, ".html") + "#/1/v" + view;
+                       			config.execute_pjs(PJS_PRINTPDF, [ hurl, fpdf, (view == 4 ? 'portrait' : 'landscape') ],
+                               			function(data) {
 							// set the modification date of pdf file to be the same as the html file
 							exec("touch -m -d \"$(stat " + fhtm + " | grep 'Modify: ' | sed s/Modify:.//)\" " + fpdf,
 								function(error, stdout, stderr) { if (error) console.log(stderr); } );
@@ -137,31 +141,22 @@ http.createServer(
 							// return the pdf when ready
 							paperboy.deliver(config.PUBLIC_HTML, req, res).
 								otherwise(function(err) {
-                        						res.writeHead(404);
-                        						res.end();
-                        					});
+                       							res.writeHead(404);
+                       							res.end();
+                       						});
 						},
-                                		function(error) {
+                               			function(error) {
 							// log error
-                                        		console.log(error);
-                                        		res.writeHead(500);
-                                        		res.end();
-                                		}
-                        		);
+                                       			console.log(error);
+                                       			res.writeHead(500);
+                                       			res.end();
+                               			}
+                       			);
 					return;	
 				}
 			}
 		}
 
-		// create pdf 
-		if (urlp.pathname.match("^.*/lecture[0-9]{1,2}\.pdf$")) {
-			generatePDF("4", ".pdf");
-		}
-
-		if (urlp.pathname.match("^.*/lecture[0-9]{1,2}_v5\.pdf$")) {
-			generatePDF("5", "_v5.pdf");
-		}
-			
 		// deliver slides if not an API request
 	    if (!urlp.pathname.match("^/api.*"))
 	    	paperboy.deliver(config.PUBLIC_HTML, req, res)
