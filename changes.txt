@@ -1,4 +1,4 @@
-CHANGES:
+* CHANGES:
 
 0.3 - current
 - first version of humla server v0.1
