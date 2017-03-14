@@ -12,9 +12,10 @@ if (system.args.length === 1) {
 		if (status === "success") {
 			var getSectionsData = function() {
 				var data = page.evaluate(function() {
-					if (humla && humla.root)
+					if (humla && humla.root) {
+						humla.baseURI = "http://myhumla.com/";
 						return JSON.stringify(humla.root.contents);
-					else
+					} else
 						return null;
 				});
 				if (!data)

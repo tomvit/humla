@@ -14,7 +14,14 @@ fi
 
 # get the script directory
 CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-echo $CUR_DIR
+
+script=$(readlink $BASH_SOURCE)
+if [ "$script" != "" ]; then
+  
+  fromd=$( cd "$( dirname $BASH_SOURCE )" && pwd )
+  
+  CUR_DIR="$fromd/$(dirname $script )"
+fi
 
 # creates the cache directory if it does not exist
 mkdir -p cache
@@ -32,6 +39,8 @@ while read line; do
     phantomjs $CUR_DIR/pjs_leccontents.js "$lf" >$tocfile
   fi
 done
+
+echo "Generating ToC..."
 
 # get the last ToC ToC file
 declare -a files
