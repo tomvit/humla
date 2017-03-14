@@ -42,6 +42,8 @@ done
 
 echo "Generating ToC..."
 
+tocmd5=$(md5 -q toc.json)
+
 # get the last ToC ToC file
 declare -a files
 files=(cache/*)
@@ -63,4 +65,6 @@ for file in "${files[@]}"; do
   fi 
 done 
 
-git add toc.json
+if [ "$tocmd5" != "$(md5 -q toc.json)" ]; then
+	git add toc.json
+fi
