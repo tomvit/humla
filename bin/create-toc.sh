@@ -49,7 +49,7 @@ pos=$(( ${#files[*]} - 1 ))
 last=${files[$pos]}
 
 # generate the complete json
-echo "{ \"slides\" : [" >toc.json
+echo "{ \"lectures\" : [" >toc.json
 
 for file in "${files[@]}"; do 
   if [[ $file == $last ]]
@@ -63,4 +63,4 @@ for file in "${files[@]}"; do
   fi 
 done 
 
-
+git add toc.json
