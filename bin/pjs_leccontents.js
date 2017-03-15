@@ -20,13 +20,6 @@ if (system.args.length === 1) {
                                                 return null;
   				}, lecturefile);
 
-				/*var data = page.evaluate(function() {
-					if (humla && humla.root) {
-						humla.baseURI = system.args[1];
-						return JSON.stringify(humla.root.contents);
-					} else
-						return null;
-				});*/
 				if (!data)
 					setTimeout(getSectionsData, 200);
 				else {

@@ -14,12 +14,9 @@ fi
 
 # get the script directory
 CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
 script=$(readlink $BASH_SOURCE)
 if [ "$script" != "" ]; then
-  
   fromd=$( cd "$( dirname $BASH_SOURCE )" && pwd )
-  
   CUR_DIR="$fromd/$(dirname $script )"
 fi
 
@@ -32,10 +29,10 @@ while read line; do
   lf="lecture$line.html"
   ln=$(printf "%02d" $line)
  
-  tocfile="cache/lecture$ln.html-$(md5 -q $lf)"
+  tocfile="cache/toc-lecture$ln.html-$(md5 -q $lf)"
   if ! [ -f $tocfile ]; then
     echo "Refreshing TOC cache for $lf..."
-    rm -f cache/lecture$ln.html-*
+    rm -f cache/toc-lecture$ln.html-*
     phantomjs $CUR_DIR/pjs_leccontents.js "$lf" >$tocfile
   fi
 done

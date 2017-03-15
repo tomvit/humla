@@ -38,3 +38,7 @@ div.wkhtml { /* hack for wkhtmltopdf */
 .h-github .toolbar2 {
     visibility: hidden;
 }
+
+.intro > hgroup h1, .intro > hgroup h2 {
+    color: black;
+}
