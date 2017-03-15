@@ -66,5 +66,8 @@ for file in "${files[@]}"; do
 done 
 
 if [ "$tocmd5" != "$(md5 -q toc.json)" ]; then
-	git add toc.json
+  echo "ToC has been changed, adding it to the current commit..."	
+  git add toc.json
+else
+  echo "ToC has not been modified."
 fi
