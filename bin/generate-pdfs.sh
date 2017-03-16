@@ -20,7 +20,7 @@ mkdir -p pdf
 pid=$(ps ax | grep "http-server" | grep -v "grep" | awk '{print $1}')
 if [ "$pid" = "" ]; then
         echo "Starting http server..."
-        node $HUMLA_BIN/http-server.js &>/dev/null &
+        node $HUMLA_BIN/http-server.js &
         if [ $? -ne 0 ]; then
                 echo "Error occured when starting http-server"
                 exit 1
@@ -31,8 +31,6 @@ else
         exit 1
 fi
 echo "The pid of the http-server is $pid"
-
-exit 1
 
 # find all lectures in the current directory, sort by lecture sequence number
 ls | egrep "lecture[0-9]+.html" | egrep -o "[0-9]+" | sort -n | \
