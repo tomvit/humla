@@ -43,7 +43,7 @@ tocmd5=$(md5 -q toc.json)
 
 # get the last ToC ToC file
 declare -a files
-files=(cache/*)
+files=(cache/toc-*)
 pos=$(( ${#files[*]} - 1 ))
 last=${files[$pos]}
 
