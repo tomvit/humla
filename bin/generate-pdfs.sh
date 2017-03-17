@@ -1,7 +1,11 @@
 #!/bin/bash
 
-md5 () {
-        md5sum $1 | awk '{ print $1 }'
+__md5 () {
+	if [ "$(uname)" = "Darwin" ]; then
+                md5 -q $1
+        else
+                md5sum $1 | awk '{ print $1 }'
+        fi
 }
 
 # check if phantomjs is installed
@@ -38,7 +42,7 @@ while read line; do
   lf="lecture$line.html"
   ln=$(printf "%02d" $line)
 
-  md5file="cache/pdf-lecture$ln.html-$(md5 $lf)"
+  md5file="cache/pdf-lecture$ln.html-$(__md5 $lf)"
   if ! [ -f $md5file ] || ! [ -f pdf/lecture$line-2p.pdf ] || ! [ -f pdf/lecture$line-1p.pdf ]; then
     rm -f cache/pdf-lecture$ln.html-*
     echo "Creating pdf for $lf..."
