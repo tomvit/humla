@@ -1,43 +1,37 @@
 #!/bin/bash
 
-__md5 () {
-	if [ "$(uname)" = "Darwin" ]; then
-                md5 -q $1
-        else
-                md5sum $1 | awk '{ print $1 }'
-        fi
-}
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $SCRIPT_DIR/env.sh
 
-# check if phantomjs is installed
-phantomjs --version &>/dev/null
-if [ $? -ne 0 ]; then
-        echo "ToC cannot be generated, phantomjs is not available!"
-        exit 1
-fi
+# check phantomjs and node is installed
+__check_pjs
+__check_node
 
-HUMLA_BIN="$COURSE_HOME/humla/bin"
-
-if [ "$COURSE_HOME" = "" ]; then
-        echo "Please set the COURSE_HOME env variable before running the script!"
-        exit 1
+numlec=$(__num_lectures $COURSE_HOME)
+if [ "$numlec" -eq 0 ]; then
+	echo "There are no lecture files, nothing to process!"
+	exit 0
 fi
 
 cd $COURSE_HOME
+echo "There are $numlec lecture files."
 
 # use cache set to false
 if [ "$1" = "0" ]; then
         # remove cache, will be all created 
-        rm cache/pdf-*
+	rm -f cache/pdf-* 
+	echo "USECACHE is false, all cached pdf files were removed."
 fi
 
-# creates the output pdf directory if it does not exist
+# creates the output cache and pdf directories 
+mkdir -p cache
 mkdir -p pdf
 
-# start http server 
+# start the http server 
 pid=$(ps ax | grep "http-server" | grep -v "grep" | awk '{print $1}')
 if [ "$pid" = "" ]; then
-        echo "Starting http server..."
-        node $HUMLA_BIN/http-server.js &
+        echo "Starting http server on port $HTTP_PORT in quiet mode..."
+        node $HUMLA_BIN/http-server.js $HTTP_PORT --quiet &
         if [ $? -ne 0 ]; then
                 echo "Error occured when starting http-server"
                 exit 1
@@ -59,9 +53,8 @@ while read line; do
   if ! [ -f $md5file ] || ! [ -f pdf/lecture$line-2p.pdf ] || ! [ -f pdf/lecture$line-1p.pdf ]; then
     rm -f cache/pdf-lecture$ln.html-*
     echo "Creating pdf for $lf..."
-    phantomjs $HUMLA_BIN/pjs_printpdf.js "http://localhost:9000/$lf" pdf/lecture$line-2p.pdf pdf/lecture$line-1p.pdf
+    phantomjs $HUMLA_BIN/pjs_printpdf.js "http://localhost:$HTTP_PORT/$lf" pdf/lecture$line-2p.pdf pdf/lecture$line-1p.pdf
     touch $md5file
-
   fi
 done
 

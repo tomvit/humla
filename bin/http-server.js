@@ -7,9 +7,11 @@ const url = require('url');
 const fs = require('fs');
 const path = require('path');
 const port = process.argv[2] || 9000;
+const mode = process.argv[3] || "";
 
 http.createServer(function (req, res) {
-  //console.log(`${req.method} ${req.url}`);
+  if (mode !== "--quiet")
+  	console.log(`${req.method} ${req.url}`);
 
   // parse URL
   const parsedUrl = url.parse(req.url);
@@ -60,4 +62,5 @@ http.createServer(function (req, res) {
 
 }).listen(parseInt(port));
 
-//console.log(`Server listening on port ${port}`);
+if (mode !== "--quiet")
+	console.log(`Server listening on port ${port}`);
