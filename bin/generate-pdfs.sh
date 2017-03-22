@@ -17,6 +17,19 @@ fi
 
 HUMLA_BIN="$COURSE_HOME/humla/bin"
 
+if [ "$COURSE_HOME" = "" ]; then
+        echo "Please set the COURSE_HOME env variable before running the script!"
+        exit 1
+fi
+
+cd $COURSE_HOME
+
+# use cache set to false
+if [ "$1" = "0" ]; then
+        # remove cache, will be all created 
+        rm cache/pdf-*
+fi
+
 # creates the output pdf directory if it does not exist
 mkdir -p pdf
 
