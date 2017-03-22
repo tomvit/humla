@@ -39,6 +39,11 @@ div.wkhtml { /* hack for wkhtmltopdf */
     visibility: hidden;
 }
 
+.intro > hgroup {
+    background: none;
+    background-color: WhiteSmoke;
+}
+
 .intro > hgroup h1, .intro > hgroup h2 {
-    color: black;
+    color: DimGray;
 }
