@@ -59,6 +59,12 @@
     ],
     
     "extensions": [
+	{   "id" : "material_icons",
+            "object" : "ex_material_icons",
+            "styles"  : [ { "src" : "https://fonts.googleapis.com/icon?family=Material+Icons", "media" : "screen"  } ],
+            "enabled" : true
+        },
+
         {   "id" : "outline",
             "object" : "ex_outline",
             "scripts"  : [ { "src" : "ext/outline.js" } ],  
@@ -117,8 +123,7 @@
             "scripts" : [ { "src" : "ext/github.js" } ],
             "styles"  : [ { "src" : "ext/github.css", "media" : "screen, print" } ],
             "params"  : {
-                "url"  : "http://proxy.vitvar.com/raw.github",
-                "user-repo" : "tomvit/mdw-examples"
+                "user-repo" : ""
             },
             "enabled" : true 
         },
