@@ -16,8 +16,22 @@ var page = require('webpage').create(),
     var maxwaittime = 20000;
     var starttime = new Date().getTime();
 
+    function removeLocalhostHrefs() {
+    	page.evaluate(function() {
+		var as = document.getElementsByTagName("a");
+		for (i = 0; i < as.length; i++) {
+			a = as[i];
+			//due to the issue in phantomjs 1.1 it is not possible to filiter out only hash-based links
+			//href = a.getAttribute("href");
+			//if (href.chartAt(0) == "#")
+			a.removeAttribute("href");
+		}
+        });
+    }
+
     function render2p() {
         page.paperSize = paperSize2p;
+        removeLocalhostHrefs();
         page.evaluate(function(zoom) {
             return document.querySelector('body').style.zoom = zoom;
         }, 0.8);
@@ -27,6 +41,7 @@ var page = require('webpage').create(),
 
     function render1p() {
         page.paperSize = paperSize1p;
+        removeLocalhostHrefs();
         page.evaluate(function(zoom) {
             return document.querySelector('body').style.zoom = zoom;
         }, 0.9);
@@ -41,7 +56,8 @@ var page = require('webpage').create(),
 
             if (new Date().getTime() - starttime > maxwaittime) {
                 console.log("- The maximum time " + maxwaittime + "ms to wait for objects was reached!");
-                phantom.exit();
+		console.log("- the pdfs will not be rendered!");
+                phantom.exit(1);
             }
 
             setTimeout(function () {
