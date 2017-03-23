@@ -5,15 +5,12 @@
 .h-github .toolbar2 {
     position: absolute !important;
     bottom: 1px !important;
-    width: 55px !important;
-    height: 23px !important;
-    z-index: 10 !important;
     border: 1px solid #cccccc !important;
+    height: 24px !important;
     right: 80px !important;
     -moz-border-radius: 4px !important;
     -webkit-border-radius: 4px !important;
     background-color: whitesmoke !important;
-    font-family: "Pictos" !important;
     
     -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px; 
     -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px;    	    
@@ -30,12 +27,9 @@
 
 .h-github .toolbar2-visible a.icon,
 .h-github .toolbar2 a.icon {
-    position: static !important;
-    font-family: "Pictos" !important;
-    font-size: 20px !important;
+    font-size: 15px !important;
     text-decoration: none !important;
     color: #888;
-    padding: 6px !important;
     text-shadow: 0 2px 0 #eee !important;        
 }
 
@@ -44,4 +38,12 @@
     color: #222;
     text-shadow: 0 2px 0 #eee !important;        
 }
+
+.material-icons {
+    font-size: 20px;
+    padding-top: 2px;
+    padding-left: 4px;
+    padding-right: 2px;
+}
+
 
