@@ -6,8 +6,25 @@ const http = require('http');
 const url = require('url');
 const fs = require('fs');
 const path = require('path');
+const util = require('util');
+const exec = require('child_process').exec;
+
 const port = process.argv[2] || 9000;
 const mode = process.argv[3] || "";
+
+
+getLastModified = function(pathname, onready, onerror) {
+  var cmd = "git log -1 --format=\"%ad\" --date=rfc -- " + pathname;
+  exec(cmd, 
+	function (error, stdout, stderr) {
+        	if (!error) {
+			var d = new Date(Date.parse(stdout));
+                	onready(d);
+                } else
+                	if (onerror)
+                        	onerror("Error executing '" + cmd + "'. The error was " + error)
+        });
+}
 
 http.createServer(function (req, res) {
   if (mode !== "--quiet")
@@ -54,7 +71,21 @@ http.createServer(function (req, res) {
       } else {
         // if the file is found, set Content-type and send data
         res.setHeader('Content-type', map[ext] || 'text/plain' );
-        res.end(data);
+	
+	getLastModified(pathname, 
+		function(lastModified) {
+			res.setHeader('Last-Modified', lastModified.toUTCString());
+			res.end(data);
+		},
+		function() {
+			if (mode != "--quiet")
+				console.log("Cannot retrieve last modified from git log for " + pathname + ", using fs created time.");
+			var stats = fs.statSync(pathname);
+        		var mtime = new Date(util.inspect(stats.ctime));
+        		res.setHeader('Last-Modified', mtime.toUTCString())
+			res.end(data);			
+		}
+	);	
       }
     });
   });
