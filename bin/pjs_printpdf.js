@@ -50,9 +50,24 @@ var page = require('webpage').create(),
     }
 
     page.open(address, function (status) {
-        console.log("- Waiting for all objects to finish loading...");
+        console.log("- Waiting for Humla controller ready state to be complete...");
 
-        function renderWhenReady() {
+	function checkReadyState(waitms) {
+        	setTimeout(function () {
+            		var readyState = page.evaluate(function () {
+                		return humla ? humla.controler.readyState : null;
+            		});
+
+            		if ("complete" === readyState) {
+                		console.log("- Waiting for all objects to finish loading...");
+                                renderWhenReady(300);
+            		} else {
+                		checkReadyState(100);
+            		}
+        	}, waitms);
+    	}
+    	
+        function renderWhenReady(waitms) {
 
             if (new Date().getTime() - starttime > maxwaittime) {
                 console.log("- The maximum time " + maxwaittime + "ms to wait for objects was reached!");
@@ -65,8 +80,10 @@ var page = require('webpage').create(),
                     humla.controler.activateView(3);
 		    var cntr = 0;
                     for (i = 0; i < humla.slides.length; i++) {
-                       if (humla.slides[i].async_cntr)
-                        cntr += humla.slides[i].async_cntr.drawing;
+                       if (humla.slides[i].async_cntr) {
+			 if (humla.slides[i].async_cntr.drawing)
+                           cntr += humla.slides[i].async_cntr.drawing;
+		       }
                     }
                     return cntr;
                 });
@@ -87,11 +104,11 @@ var page = require('webpage').create(),
 		    }, 200);
 
                 } else {
-                    renderWhenReady();
+                    renderWhenReady(100);
                 }
-            }, 100);
-        }
+            }, waitms);
+        };
 
-        renderWhenReady();
+	checkReadyState(300);
 
     });
