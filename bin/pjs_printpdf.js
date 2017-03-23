@@ -29,26 +29,6 @@ var page = require('webpage').create(),
         });
     }
 
-    /*function render2p() {
-        page.paperSize = paperSize2p;
-        removeLocalhostHrefs();
-        page.evaluate(function(zoom) {
-            return document.querySelector('body').style.zoom = zoom;
-        }, 0.8);
-        console.log("- Rendering PDF to " + output2p);
-        page.render(output2p);
-    }
-
-    function render1p() {
-        page.paperSize = paperSize1p;
-        removeLocalhostHrefs();
-        page.evaluate(function(zoom) {
-            return document.querySelector('body').style.zoom = zoom;
-        }, 0.9);
-        console.log("- Rendering PDF to " + output1p);
-        page.render(output1p);
-    }*/
-
     function renderPdf(paperSize, removeLHR, zoom, outputFile) {
         page.paperSize = paperSize;
 	if (removeLHR)
