@@ -33,12 +33,12 @@ if [ "$pid" = "" ]; then
         echo "Starting http server on port $HTTP_PORT in quiet mode..."
         node $HUMLA_BIN/http-server.js $HTTP_PORT --quiet &
         if [ $? -ne 0 ]; then
-                echo "Error occured when starting http-server"
+                echo "Error occured when starting the server."
                 exit 1
         fi
         pid=$(ps ax | grep "http-server" | grep -v "grep" | awk '{print $1}')
 else
-        echo "http-server is already running, please stop it before creating pdfs."
+        echo "http-server is already running, please stop it before running the script."
         exit 1
 fi
 echo "The pid of the http-server is $pid"
@@ -59,6 +59,6 @@ while read line; do
 done
 
 # stop the server
-echo "Stopping http server..."
+echo "Stopping the http server..."
 kill $pid
 

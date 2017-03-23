@@ -32,6 +32,22 @@ fi
 # creates the cache directory if it does not exist
 mkdir -p cache
 
+# start the http server 
+pid=$(ps ax | grep "http-server" | grep -v "grep" | awk '{print $1}')
+if [ "$pid" = "" ]; then
+        echo "Starting http server on port $HTTP_PORT in quiet mode..."
+        node $HUMLA_BIN/http-server.js $HTTP_PORT --quiet &
+        if [ $? -ne 0 ]; then
+                echo "Error occured when starting the server."
+                exit 1
+        fi
+        pid=$(ps ax | grep "http-server" | grep -v "grep" | awk '{print $1}')
+else
+        echo "http-server is already running, please stop it before running the script."
+        exit 1
+fi
+echo "The pid of the http-server is $pid"
+
 # find all lectures in the current directory, sort by lecture sequence number
 ls | egrep "lecture[0-9]+.html" | egrep -o "[0-9]+" | sort -n | \
 while read line; do
@@ -42,7 +58,7 @@ while read line; do
   if ! [ -f $tocfile ]; then
     echo "Refreshing TOC cache for $lf..."
     rm -f cache/toc-lecture$ln.html-*
-    phantomjs $HUMLA_BIN/pjs_leccontents.js "$lf" >$tocfile
+    phantomjs $HUMLA_BIN/pjs_leccontents.js "http://localhost:$HTTP_PORT/$lf" >$tocfile
   fi
 done
 
@@ -77,3 +93,6 @@ if [ "$tocmd5" = "$(__md5 toc.json)" ]; then
   echo "ToC has not been modified."
 fi
 
+# stop the server
+echo "Stopping the http server..."
+kill $pid

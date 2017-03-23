@@ -18,7 +18,7 @@ if (system.args.length === 1) {
                                                 return JSON.stringify(humla.root.contents);
                                         } else
                                                 return null;
-  				}, lecturefile);
+  				}, lecturefile.replace(/http:\/\/.*\//,""));
 
 				if (!data)
 					setTimeout(getSectionsData, 200);
