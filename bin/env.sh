@@ -50,7 +50,3 @@ __num_lectures() {
 	echo $numlec
 }
 
-
-
-
-
