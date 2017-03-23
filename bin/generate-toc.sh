@@ -24,7 +24,7 @@ echo "There are $numlec lecture files."
 # use cache set to false
 if [ "$1" = "0" ]; then
         # remove cache, will be all created 
-        rm -f cache/top-*
+        rm -f cache/toc-*
 	rm -f toc.json
         echo "USECACHE is false, all cached toc files were removed."
 fi
