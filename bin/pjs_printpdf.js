@@ -29,7 +29,7 @@ var page = require('webpage').create(),
         });
     }
 
-    function render2p() {
+    /*function render2p() {
         page.paperSize = paperSize2p;
         removeLocalhostHrefs();
         page.evaluate(function(zoom) {
@@ -47,6 +47,17 @@ var page = require('webpage').create(),
         }, 0.9);
         console.log("- Rendering PDF to " + output1p);
         page.render(output1p);
+    }*/
+
+    function renderPdf(paperSize, removeLHR, zoom, outputFile) {
+        page.paperSize = paperSize;
+	if (removeLHR)
+          removeLocalhostHrefs();
+        page.evaluate(function(zoom) {
+            return document.querySelector('body').style.zoom = zoom;
+        }, zoom);
+        console.log("- Rendering PDF to " + outputFile);
+        page.render(outputFile);
     }
 
     page.open(address, function (status) {
@@ -95,10 +106,10 @@ var page = require('webpage').create(),
                     
                     var v3 = page.evaluate(function () { humla.controler.activateView(3); });
 		    setTimeout(function() {
-		      render2p();
+		      renderPdf(paperSize2p, true, 0.8, output2p);
                       var v4 = page.evaluate(function () { humla.controler.activateView(4); });
 		      setTimeout(function() {
-		    	render1p();
+		    	renderPdf(paperSize1p, false, 0.9, output1p);
                     	phantom.exit();
 		      }, 200)
 		    }, 200);
