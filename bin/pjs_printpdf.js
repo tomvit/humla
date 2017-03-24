@@ -31,14 +31,20 @@ var page = require('webpage').create(),
 
     function renderPdf(paperSize, removeLHR, zoom, outputFile) {
         page.paperSize = paperSize;
-	if (removeLHR)
+
+	    if (removeLHR)
           removeLocalhostHrefs();
+
         page.evaluate(function(zoom) {
             return document.querySelector('body').style.zoom = zoom;
         }, zoom);
+
         console.log("- Rendering PDF to " + outputFile);
         page.render(outputFile);
     }
+
+    // start with print pdf 2 pages view regardless what was provided on the input
+    address = address.replace(/#.*/, "") + "#/1/v4";
 
     page.open(address, function (status) {
         console.log("- Waiting for Humla controller ready state to be complete...");
@@ -62,7 +68,7 @@ var page = require('webpage').create(),
 
             if (new Date().getTime() - starttime > maxwaittime) {
                 console.log("- The maximum time " + maxwaittime + "ms to wait for objects was reached!");
-		console.log("- the pdfs will not be rendered!");
+		        console.log("- the pdfs will not be rendered!");
                 phantom.exit(1);
             }
 
@@ -77,22 +83,22 @@ var page = require('webpage').create(),
 		       }
                     }
                     return cntr;
-                });
+               });
 
-		//console.log("Objects remaining: " + acntr + "...");
+		    //console.log("Objects remaining: " + acntr + "...");
 
                 if (acntr === 0) {
                     console.log("- All objects loaded in " + (new Date().getTime() - starttime) + "ms.");
                     
-                    var v3 = page.evaluate(function () { humla.controler.activateView(3); });
-		    setTimeout(function() {
-		      renderPdf(paperSize2p, true, 0.8, output2p);
-                      var v4 = page.evaluate(function () { humla.controler.activateView(4); });
-		      setTimeout(function() {
-		    	renderPdf(paperSize1p, false, 0.9, output1p);
-                    	phantom.exit();
-		      }, 200)
-		    }, 200);
+                    page.evaluate(function () { humla.controler.activateView(3); });
+		            setTimeout(function() {
+		                renderPdf(paperSize2p, true, 0.8, output2p);
+                        page.evaluate(function () { humla.controler.activateView(4); });
+		                setTimeout(function() {
+		    	            renderPdf(paperSize1p, false, 0.9, output1p);
+                    	    phantom.exit();
+		                }, 200)
+		            }, 200);
 
                 } else {
                     renderWhenReady(100);
