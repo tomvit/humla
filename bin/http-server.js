@@ -34,8 +34,11 @@ http.createServer(function (req, res) {
   const parsedUrl = url.parse(req.url);
   // extract URL path
   let pathname = `.${parsedUrl.pathname}`;
+  if (pathname === "./") pathname = "index.html";
+
   // based on the URL path, extract the file extention. e.g. .js, .doc, ...
   const ext = path.parse(pathname).ext;
+
   // maps file extention to MIME typere
   const map = {
     '.ico': 'image/x-icon',
