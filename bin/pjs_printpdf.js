@@ -1,5 +1,10 @@
 // phantomjs script to create pdf from slides
 
+/*console.olog = console.log;
+console.log = function(str) {
+	this.olog(str);
+}*/
+
 var page = require('webpage').create(),
     system = require('system'),
     address, output, size;
