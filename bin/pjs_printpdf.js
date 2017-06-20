@@ -79,7 +79,8 @@ var page = require('webpage').create(),
 
             setTimeout(function () {
                 var acntr = page.evaluate(function () {
-                    humla.controler.activateView(3);
+                    humla.msgbox.disable();
+		    humla.controler.activateView(3);
 		    var cntr = 0;
                     for (i = 0; i < humla.slides.length; i++) {
                        if (humla.slides[i].async_cntr) {
