@@ -50,7 +50,7 @@ When you checkout the repository, you can use the following commands:
 Type `make help` to explore other options. 
 
 Humla can also be used together with services such as travis-ci to generate required content (toc, pdfs) and push the content to
-github pages. Explore <a href="https://github.com/tomvit/w20/.travis.yml">travis.yml</a> for details.
+github pages. Explore <a href="https://github.com/tomvit/w20/blob/master/.travis.yml">travis.yml</a> for details.
 
 When you are in the browser, use the following keys to navigate the slides:
 
