@@ -77,6 +77,7 @@ http.createServer(function (req, res) {
 	
 	getLastModified(pathname, 
 		function(lastModified) {
+			//console.log("file " + pathname + " was last modified on " + lastModified);
 			res.setHeader('Last-Modified', lastModified.toUTCString());
 			res.end(data);
 		},
