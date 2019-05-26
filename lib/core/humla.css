@@ -89,12 +89,14 @@ body {
 
 .slide > hgroup h1 {
 	padding-top: 4px;
-    width: 770px;
-	margin: 0px 10px 0px 10px;	
+    #width: 770px;
+	margin: 0px 10px 0px 10px;
+    width: 100%;	
 }
 
 .intro > hgroup h2 {
-    width: 770px;
+    #width: 770px;
+    width: 100%;
 }
 
 .slide > ul p,
