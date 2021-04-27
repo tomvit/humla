@@ -33,7 +33,7 @@ fi
 mkdir -p cache
 
 # start the http server 
-pid=$(ps ax | grep "http-server" | grep -v "grep" | awk '{print $1}')
+pid=$(ps ax | grep "http-server" | grep $HTTP_PORT | grep -v "grep" | awk '{print $1}')
 if [ "$pid" = "" ]; then
         echo "Starting http server on port $HTTP_PORT in quiet mode..."
         node $HUMLA_BIN/http-server.js $HTTP_PORT --quiet &
