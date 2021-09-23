@@ -47,6 +47,7 @@ else
         exit 1
 fi
 echo "The pid of the http-server is $pid"
+sleep 2
 
 # find all lectures in the current directory, sort by lecture sequence number
 ls | egrep "lecture[0-9]+.html" | egrep -o "[0-9]+" | sort -n | \
@@ -58,7 +59,7 @@ while read line; do
   if ! [ -f $tocfile ]; then
     echo "Refreshing TOC cache for $lf..."
     rm -f cache/toc-lecture$ln.html-*
-    phantomjs $HUMLA_BIN/pjs_leccontents.js "http://localhost:$HTTP_PORT/$lf" >$tocfile
+    $PHANTOMJS $HUMLA_BIN/pjs_leccontents.js "http://localhost:$HTTP_PORT/$lf" >$tocfile
   fi
 done
 

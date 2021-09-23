@@ -1,6 +1,11 @@
 * CHANGES:
 
-0.3 - current
+1.0
+- humla server deprecared
+- pdf and toc generation scripts
+- docker image and scripts to generate pdf and toc 
+
+0.3
 - first version of humla server v0.1
 - ajax crawling via phantomjs 
 - !# used in fragments on slides when ajax crawling is enabled by the server

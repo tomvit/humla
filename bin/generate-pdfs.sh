@@ -42,6 +42,7 @@ else
         exit 1
 fi
 echo "The pid of the http-server is $pid"
+sleep 2
 
 # all lecture numbers in the current directory
 lecnums=$(ls | egrep "lecture[0-9]+.html" | egrep -o "[0-9]+" | sort -n)
@@ -57,7 +58,7 @@ for line in $lecnums; do
   if ! [ -f $md5file ] || ! [ -f pdf/lecture$line-2p.pdf ] || ! [ -f pdf/lecture$line-1p.pdf ]; then
     rm -f cache/pdf-lecture$ln.html-*
     echo "Creating pdf for $lf, http://localhost:$HTTP_PORT/$lf"
-    phantomjs $HUMLA_BIN/pjs_printpdf.js "http://localhost:$HTTP_PORT/$lf" pdf/lecture$line-2p.pdf pdf/lecture$line-1p.pdf
+    $PHANTOMJS $HUMLA_BIN/pjs_printpdf.js "http://localhost:$HTTP_PORT/$lf" pdf/lecture$line-2p.pdf pdf/lecture$line-1p.pdf
     if [ $? -ne 0 ]; then
     	echo "- an error ocurred when rendering the pdf, will retry once more..."
 	pdfretry="$pdfretry $line"
@@ -77,7 +78,7 @@ if [ "$pdfretry" != "" ]; then
 		
     md5file="cache/pdf-lecture$ln.html-$(__md5 $lf)"
     echo "Retrying to create pdf for $lf..."
-    phantomjs $HUMLA_BIN/pjs_printpdf.js "http://localhost:$HTTP_PORT/$lf" pdf/lecture$line-2p.pdf pdf/lecture$line-1p.pdf
+    $PHANTOMJS $HUMLA_BIN/pjs_printpdf.js "http://localhost:$HTTP_PORT/$lf" pdf/lecture$line-2p.pdf pdf/lecture$line-1p.pdf
     if [ $? -ne 0 ]; then
       echo "The second attempt to create pdfs failed, giving up!"
     else

@@ -3,18 +3,24 @@
 # check if CORUSE_HOME was defined, if not set it to the current directory
 if [ "$COURSE_HOME" = "" ]; then
 	export COURSE_HOME=$(pwd)
-	echo "COURSE_HOME env variable has not been set..."
-	echo "COURSE_HOME env variable set to the current direcory, the value is $COURSE_HOME"
+	if [[ -z ${SUPPRESS_WARNINGS} || ${SUPPRESS_WARNINGS} -eq 0 ]]; then
+	    echo "WARN: COURSE_HOME env variable has not been set..."
+	    echo "WARN: COURSE_HOME env variable set to the current direcory, the value is $COURSE_HOME"
+	fi
 fi
 
 # HUMLA_BIN points to Humla scripts directory
 export HUMLA_BIN="$COURSE_HOME/humla/bin"
 if ! [ -d "$HUMLA_BIN" ]; then
-	echo "$HUMLA_BIN does not exist! Is COURSE_HOME the home of the course?"	
+	echo "ERROR: $HUMLA_BIN does not exist! Is COURSE_HOME the home of the course?"	
 	exit 1
 fi
 
 export HTTP_PORT=9009
+export HUMLA_VERSION=1.0
+
+[ -z ${PHANTOMJS} ] && export PHANTOMJS="phantomjs"
+[ -z ${HUMLA_IMAGE} ] && docker &>/dev/null && export HUMLA_IMAGE=$(docker images | awk '{print $1":"$2}' | grep "humla:${HUMLA_VERSION}")
 
 # utility functions
 # md5 function
@@ -28,9 +34,9 @@ __md5 () {
 
 # check if phantomjs is installed
 __check_pjs() {
-	phantomjs --version &>/dev/null
+	$PHANTOMJS --version &>/dev/null
 	if [ $? -ne 0 ]; then
-        	echo "phantomjs cannot be found!"
+        	echo "ERROR: phantomjs cannot be found!"
         	exit 1
 	fi
 }
@@ -39,9 +45,13 @@ __check_pjs() {
 __check_node() {
         node --version &>/dev/null
         if [ $? -ne 0 ]; then
-                echo "Node cannot be found!"
+                echo "ERROR: Node cannot be found!"
                 exit 1
         fi
+}
+
+__check_docker() {
+        [[ "$(docker --version &>/dev/null; echo $?)" -gt 0 ]] && echo "ERROR: The docker is not installed!" && exit 1
 }
 
 # returns the number of lectures in the COURSE_DIR
