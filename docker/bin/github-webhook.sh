@@ -55,7 +55,7 @@ done
 docker run --rm \
   --name gh-webhook \
   -p 80:8080 \
-  -e GTIHUB_REPO="$GITHUB_REPO" -e GITHUB_TOKEN="$GITHUB_TOKEN" \
+  -e GITHUB_REPO="$GITHUB_REPO" -e GITHUB_TOKEN="$GITHUB_TOKEN" \
   ${HUMLA_IMAGE} \
   /bin/bash -l -c 'cd /opt/humla/scripts/ && node github-webhook.js'
 

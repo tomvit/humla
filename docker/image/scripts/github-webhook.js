@@ -48,21 +48,6 @@ function run_script_stream(req, res, stream_response) {
     });
 }
 
-function run_script(req, res) {
-  console.log("Running webhook /opt/humla/scripts/publish-gh-pages.sh")	
-  exec('/opt/humla/scripts/publish-gh-pages.sh', (err, stdout, stderr) => {
-    if (err) {
-      console.log("ERROR: Cannot execute the command!");
-      console.log(`${stderr}`);
-      console.log(`${stdout}`);
-      return;
-    }
-    console.log(`stdout: ${stdout}`);
-    console.log(`stderr: ${stderr}`);
-    res.send("<pre>" + stdout + "</pre>")
-  });
-}
-
 let reqLogger = (req, res, next) => {
   let dt = new Date();
   let fdt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate() + " " + dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();	 
@@ -76,7 +61,7 @@ app.post('/humla/', jsonParser, (req, res) => {
   console.log("Received WebHook request for " + req.body.ref)
   branchName = req.body.ref.split('/').slice(-1)[0]	
   if (branchName == "master") {
-    run_script(req, res);
+    run_script_stream(req, res, false);
   } else {
     console.log("No action for branch " + branchName + ".")
   }

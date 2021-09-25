@@ -10,7 +10,7 @@ RUN mkdir -p /opt/humla/install && mkdir /opt/humla/scripts
 
 COPY files/fonts-humla.tar.gz /opt/humla/install/
 COPY files/phantomjs-2.1.1-linux-x86_64.tar.bz2 /opt/humla/install/
-COPY scripts/* /opt/humla/scripts
+COPY scripts/* /opt/humla/scripts/
 
 RUN mkdir /opt/humla/phantomjs && \
     tar -xvf /opt/humla/install/phantomjs-2.1.1-linux-x86_64.tar.bz2 -C /opt/humla/phantomjs/ --strip-components=1
