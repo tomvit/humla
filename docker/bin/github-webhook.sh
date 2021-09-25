@@ -52,7 +52,7 @@ done
 [ -z $GITHUB_REPO ] && echo "ERROR: The -repo option is required!" && exit 1
 [ -z $GITHUB_TOKEN ] && echo "ERROR: The -token option is required!" && exit 1
 
-docker run --rm \
+docker run --rm -t -d \
   --name gh-webhook \
   -p 80:8080 \
   -e GITHUB_REPO="$GITHUB_REPO" -e GITHUB_TOKEN="$GITHUB_TOKEN" \
