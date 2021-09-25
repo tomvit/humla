@@ -10,10 +10,12 @@ if [ "$COURSE_HOME" = "" ]; then
 fi
 
 # HUMLA_BIN points to Humla scripts directory
-export HUMLA_BIN="$COURSE_HOME/humla/bin"
-if ! [ -d "$HUMLA_BIN" ]; then
-	echo "ERROR: $HUMLA_BIN does not exist! Is COURSE_HOME the home of the course?"	
-	exit 1
+if [[ -z ${IGNORE_HUMLA_BIN} || ${IGNORE_HUMLA_BIN} -eq 0 ]]; then
+  export HUMLA_BIN="$COURSE_HOME/humla/bin"
+  if ! [ -d "$HUMLA_BIN" ]; then
+  	echo "ERROR: $HUMLA_BIN does not exist! Is COURSE_HOME the home of the course?"	
+  	exit 1
+  fi
 fi
 
 export HTTP_PORT=9009

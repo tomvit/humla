@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 
 RUN apt-get update && \
-    apt-get install -y locales fontconfig git nodejs && \
+    apt-get install -y locales fontconfig git nodejs npm && \
     rm -rf /var/lib/apt/lists/* && \
     localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.utf8
@@ -22,9 +22,12 @@ RUN cd /opt/humla/install && \
     mv fonts-humla /usr/share/fonts/ && \
     fc-cache -f -v
 
+RUN cd /opt/humla/scripts && npm install 
+
 RUN rm -fr /opt/humla/install
 
 RUN echo "export PATH=/opt/humla/phantomjs/bin:$PATH" >> /root/.bashrc
 
+WORKDIR /opt/humla
 
 
