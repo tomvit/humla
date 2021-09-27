@@ -10,7 +10,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   PLATFORM="--platform linux/x86_64"
 fi
 
-cd $hdir && docker build ${PLATFORM} -t humla:1.0 .
+cd $hdir && docker build ${PLATFORM} -t humla:1.0 . "$@"
 
 cd $pwd
 

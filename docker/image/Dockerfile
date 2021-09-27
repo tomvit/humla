@@ -8,11 +8,11 @@ ENV LANG en_US.utf8
 
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
 
-RUN mkdir -p /opt/humla/install && mkdir /opt/humla/scripts
+RUN mkdir -p /opt/humla/install && mkdir /opt/humla/scripts && mkdir /opt/humla/logs
 
 COPY files/fonts-humla.tar.gz /opt/humla/install/
 COPY files/phantomjs-2.1.1-linux-x86_64.tar.bz2 /opt/humla/install/
-COPY scripts/* /opt/humla/scripts/
+COPY scripts/ /opt/humla/scripts/
 
 RUN mkdir /opt/humla/phantomjs && \
     tar -xvf /opt/humla/install/phantomjs-2.1.1-linux-x86_64.tar.bz2 -C /opt/humla/phantomjs/ --strip-components=1
@@ -24,7 +24,7 @@ RUN cd /opt/humla/install && \
     mv fonts-humla /usr/share/fonts/ && \
     fc-cache -f -v
 
-RUN cd /opt/humla/scripts && npm install 
+RUN cd /opt/humla/scripts/gh-webhook && npm install 
 
 RUN rm -fr /opt/humla/install
 
