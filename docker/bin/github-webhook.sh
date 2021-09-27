@@ -16,13 +16,12 @@ __check_docker
 
 function help() {
 cat << EOF
-Usage: $(basename $0) -repo <REPO_NAME> -token <TOKEN>
+Usage: $(basename $0) -config
 
 Run Github Webhook service.
 
 Required arguments:
-  -repo               Valid GitHub repository (without protocol).
-  -token              Access token.
+  -config             Web hook configuraiton file.
 EOF
 }
 
@@ -30,12 +29,8 @@ EOF
 while [[ $# -gt 0 ]]; do
   key="$1"
   case $key in
-    -repo)
-    GITHUB_REPO="$2"
-    shift; shift
-    ;;
-    -token)
-    GITHUB_TOKEN="$2"
+    -config)
+    CONFIG="$2"
     shift; shift
     ;;
     -h)
@@ -49,14 +44,13 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-[ -z $GITHUB_REPO ] && echo "ERROR: The -repo option is required!" && exit 1
-[ -z $GITHUB_TOKEN ] && echo "ERROR: The -token option is required!" && exit 1
-
-docker run --rm -t -d \
+docker run -t -d \
+  --restart always \
   --name gh-webhook \
   -p 80:8080 \
-  -e GITHUB_REPO="$GITHUB_REPO" -e GITHUB_TOKEN="$GITHUB_TOKEN" \
+  -v $(realpath $CONFIG):/opt/humla/scripts/gh-webhook/config.json \
+  -v $(pwd)/gh-webhook-logs:/opt/humla/logs \
   ${HUMLA_IMAGE} \
-  /bin/bash -l -c 'cd /opt/humla/scripts/ && node github-webhook.js'
+  /bin/bash -l -c 'cd /opt/humla/scripts/gh-webhook && node gh-webhook.js'
 
 
