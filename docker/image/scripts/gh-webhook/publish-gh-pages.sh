@@ -26,6 +26,8 @@ git checkout gh-pages
 git fetch
 git merge origin/master --no-commit || exit 1
 
+rm -f pdf/*
+
 export COURSE_HOME=$(pwd)
 humla/bin/generate-toc.sh $USECACHE
 humla/bin/generate-pdfs.sh $USECACHE
