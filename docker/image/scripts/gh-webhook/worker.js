@@ -9,7 +9,7 @@ var log = fs.createWriteStream(workerData.log_file, {flags : 'w'});
 
 // prepare env variables for the script to run
 var env = Object.assign(process.env, workerData.env)
-env = Object.assign({ BUILD_ID: workData.build_id }, env)
+env = Object.assign({ BUILD_ID: workerData.build_id }, env)
 
 log.write(`Starting process webhook ${workerData.script}\n`);
 var child = child_process.spawn(workerData.script, { env : env });
