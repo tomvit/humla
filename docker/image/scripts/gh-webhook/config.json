@@ -1,0 +1,12 @@
+{
+  "web_hooks":
+  [ {
+      "url": "/humla/mdw",
+      "branch": "master",
+      "env": {
+        "GITHUB_REPO": "<repo_name>",
+        "GITHUB_TOKEN": "<token>"
+      }
+    }
+  ]
+}
