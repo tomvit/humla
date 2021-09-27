@@ -7,8 +7,12 @@ const fs = require("fs")
 
 var log = fs.createWriteStream(workerData.log_file, {flags : 'w'});
 
+// prepare env variables for the script to run
+var env = Object.assign(process.env, workerData.env)
+env = Object.assign({ BUILD_ID: workData.build_id }, env)
+
 log.write(`Starting process webhook ${workerData.script}\n`);
-var child = child_process.spawn(workerData.script, { env : Object.assign(process.env, workerData.env) });
+var child = child_process.spawn(workerData.script, { env : env });
 
 child.stdout.setEncoding('utf8');
 child.stderr.setEncoding('utf8');

@@ -33,11 +33,13 @@ var send_status = function(res, code, msg) {
 }
 
 function run_worker(wh) {
-  log_file = `/opt/humla/logs/gh-webhook-worker-${new Date().toISOString().replace(/[-,\:T\.]/g,'')}.log`
+  var build_id=new Date().toISOString().replace(/[-,\:T\.]/g,'')
+  var log_file = `/opt/humla/logs/gh-webhook-worker-${build_id}.log`
   log(`Running worker for ${wh.url}, the log file is ${log_file}`)
   var worker = new Worker('./worker.js', {
     workerData: { 
       script: WORKER_SCRIPT, 
+      build_id: build_id,
       env: wh.env, 
       log_file: log_file }
   });

@@ -2,10 +2,6 @@
 # @author: Tomas Vitvar, tomas@vitvar.com
 # public humla course to gh-pages
 
-env 
-
-echo "*******"
-
 pdir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )
 
 [ -z ${GITHUB_REPO} ] && echo "ERROR: The env variable \$GITHUB_REPO must be defined!" && exit 1
@@ -33,6 +29,5 @@ humla/bin/generate-toc.sh $USECACHE
 humla/bin/generate-pdfs.sh $USECACHE
 
 git add -A .
-git commit -a -m "Humla build" || exit 1
+git commit -a -m "Humla build ${BUILD_ID}" || exit 1
 git push --quiet origin gh-pages > /dev/null 2>&1
-
