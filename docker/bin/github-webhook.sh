@@ -44,6 +44,8 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+[ -z ${CONFIG} ] && echo "The config was not specified!" && exit 1
+
 docker run -t -d \
   --restart always \
   --name gh-webhook \
