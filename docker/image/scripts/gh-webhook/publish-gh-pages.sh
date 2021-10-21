@@ -28,7 +28,7 @@ export COURSE_HOME=$(pwd)
 humla/bin/generate-toc.sh $USECACHE
 humla/bin/generate-pdfs.sh $USECACHE
 
-git -f add toc.json
-git -f add pdf/*
+git add -f toc.json
+git add -f pdf/*
 git commit -a -m "Humla build ${BUILD_ID}" || exit 1
 git push --quiet origin gh-pages > /dev/null 2>&1
