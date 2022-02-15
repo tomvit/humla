@@ -83,7 +83,7 @@ for (wh of config.web_hooks) {
         break
     }
     if (wh == null) {
-      send_status(res, 400, "Invalid input, the repo with url ${req.url} does not exist!")
+      send_status(res, 400, `Invalid input, the repo with url ${req.url} does not exist!`)
       return
     }
 
