@@ -75,7 +75,18 @@ for (wh of config.web_hooks) {
       send_status(res, 400, "Invalid input, cannot get 'ref' from the input payload!")
       return
     }
-      
+
+    wh = null
+    for (whx of config.web_hooks) {
+      if (whx.url == req.url)
+        wh = whx
+        break
+    }
+    if (wh == null) {
+      send_status(res, 400, "Invalid input, the repo with url ${req.url} does not exist!")
+      return
+    }
+
     log(`Received web hook request for branch '${req.body.ref}'`)
     var branchName = req.body.ref.split('/').slice(-1)[0]
     if (branchName == wh.branch) {
