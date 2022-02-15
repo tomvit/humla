@@ -10,7 +10,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   PLATFORM="--platform linux/x86_64"
 fi
 
-cd $hdir && docker build ${PLATFORM} -t humla-gh-webhook:1.0 . "$@"
+cd $hdir && docker build ${PLATFORM} -t humla-gh-webhook:1.1 . "$@"
 
 cd $pwd
 
