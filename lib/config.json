@@ -59,7 +59,13 @@
     ],
     
     "extensions": [
-	{   "id" : "material_icons",
+        {
+            "id" : "jquery",
+            "scripts": [ { "src": "https://code.jquery.com/jquery-3.1.1.min.js" } ],
+            "enabled": true
+        },
+        
+	      {   "id" : "material_icons",
             "object" : "ex_material_icons",
             "styles"  : [ { "src" : "https://fonts.googleapis.com/icon?family=Material+Icons", "media" : "screen"  } ],
             "enabled" : true
@@ -141,7 +147,14 @@
                 "account" : "UA-xxx"
             },
             "enabled" : true 
+        },
+        
+        {   "id" : "follower",
+            "object" : "ex_follower",
+            "scripts" : [ { "src" : "ext/follower.js" } ],
+            "enabled" : true 
         }
+        
         
         
     ]
