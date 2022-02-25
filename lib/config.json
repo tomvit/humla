@@ -155,7 +155,7 @@
             "params" : {
               "follow_service": "http://localhost:8080"
             },
-            "enabled" : true 
+            "enabled" : false 
         }
         
         
