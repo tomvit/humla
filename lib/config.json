@@ -152,6 +152,9 @@
         {   "id" : "follower",
             "object" : "ex_follower",
             "scripts" : [ { "src" : "ext/follower.js" } ],
+            "params" : {
+              "follow_service": "http://localhost:8080"
+            },
             "enabled" : true 
         }
         
