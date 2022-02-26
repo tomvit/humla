@@ -121,12 +121,8 @@ app.post('/masters', (req, res) => {
 
   // construct the set-cookie domain parameter 
   domain = ""
-  if (req.get('Origin') != null) {
-    var re = new RegExp('https?://([a-zA-Z\._0-9]+)(:[0-9]+)?', 'i')
-    match = re.exec(req.get('Origin'))
-    if (match != null)
-      domain = `Domain=${match[1]}; `
-  }
+  if (req.get('Host') != null)
+    domain = `Domain=${req.get('Host')}; `
 
   // send response 
   res.writeHead(200, {
