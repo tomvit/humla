@@ -1,4 +1,4 @@
-// github-webhook service 
+// follow service 
 // @author: Tomas Vitvar, tomas@vitvar.com
 
 var fs = require('fs');
@@ -202,5 +202,5 @@ app.post('/masters', (req, res) => {
 })
 
 app.listen(TCP_PORT, () => {
-  log(`gh-webhook service listening at http://localhost:${TCP_PORT}`)
+  log(`follow service listening at http://localhost:${TCP_PORT}`)
 })
