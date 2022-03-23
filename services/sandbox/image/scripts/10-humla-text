@@ -1,0 +1,5 @@
+#!/bin/sh
+printf "\n"
+printf "This is the Humla sandbox that is used to demostrate various technologies\n"
+printf "covred by AM1 and AM2 CTU FIT university courses.\n"
+printf "\n"
